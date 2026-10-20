@@ -3,20 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
 
   <title>Enzo Annie | Luxury Lighting & Electronics</title>
 
-  <meta
-    name="description"
-    content="Discover premium lighting, electronics, and accessories at Enzo Annie Luxury Lighting & Electronics."
-  >
-
-  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Discover luxury lighting, electronics, and accessories at Enzo Annie Luxury Lighting & Electronics.">
 
   <style>
     :root {
       --black: #101010;
-      --dark: #191919;
+      --dark: #1a1a1a;
       --gold: #d6b36a;
       --cream: #f8f6f0;
       --white: #ffffff;
@@ -41,6 +37,11 @@
       line-height: 1.6;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
     button,
     input {
       font: inherit;
@@ -50,17 +51,12 @@
       cursor: pointer;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
     .announcement {
       background: var(--gold);
       color: var(--black);
       text-align: center;
-      padding: 9px 12px;
-      font-size: 12px;
+      padding: 9px;
+      font-size: 11px;
       font-weight: bold;
       letter-spacing: 1px;
     }
@@ -70,42 +66,37 @@
       color: var(--white);
       padding: 18px 5%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 20px;
       flex-wrap: wrap;
     }
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-    }
-
     .brand-name {
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--gold);
+      font-family: Georgia, serif;
       font-size: 23px;
+      color: var(--gold);
       font-weight: bold;
       letter-spacing: 1px;
     }
 
     .brand-subtitle {
+      display: block;
       font-size: 9px;
+      color: #eeeeee;
       letter-spacing: 2px;
-      color: #dddddd;
       text-transform: uppercase;
     }
 
     nav {
       display: flex;
-      gap: 22px;
-      align-items: center;
       flex-wrap: wrap;
+      gap: 18px;
     }
 
     nav a {
-      font-size: 13px;
       color: #eeeeee;
+      font-size: 12px;
     }
 
     nav a:hover {
@@ -113,71 +104,65 @@
     }
 
     .hero {
-      min-height: 440px;
-      padding: 70px 7%;
+      min-height: 430px;
+      padding: 65px 7%;
       display: flex;
       align-items: center;
+      color: white;
       background:
-        linear-gradient(
-          90deg,
-          rgba(0, 0, 0, 0.94),
-          rgba(0, 0, 0, 0.72),
-          rgba(0, 0, 0, 0.22)
-        ),
+        linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.5)),
         url("https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1800&q=85")
         center/cover no-repeat;
-      color: var(--white);
     }
 
     .hero-content {
-      max-width: 650px;
+      max-width: 620px;
     }
 
     .eyebrow {
       color: var(--gold);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
       letter-spacing: 4px;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 15px;
     }
 
     .hero h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(38px, 6vw, 68px);
-      line-height: 1.12;
-      margin-bottom: 22px;
+      font-family: Georgia, serif;
       font-weight: normal;
+      font-size: clamp(38px, 6vw, 65px);
+      line-height: 1.12;
+      margin-bottom: 20px;
     }
 
     .hero p {
-      max-width: 490px;
-      color: #e1e1e1;
-      font-size: 15px;
-      margin-bottom: 30px;
+      color: #eeeeee;
+      font-size: 14px;
+      max-width: 480px;
+      margin-bottom: 28px;
     }
 
     .button {
       display: inline-block;
       border: none;
-      padding: 13px 23px;
+      padding: 13px 22px;
       background: var(--gold);
       color: var(--black);
+      font-size: 12px;
       font-weight: bold;
-      font-size: 13px;
-      transition: 0.2s;
+      transition: .2s;
     }
 
     .button:hover {
-      background: #edcf8a;
-      transform: translateY(-2px);
+      background: #edd18f;
     }
 
     .features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      background: var(--white);
-      padding: 26px 5%;
+      background: white;
+      padding: 25px 5%;
       border-bottom: 1px solid var(--border);
     }
 
@@ -187,67 +172,60 @@
     }
 
     .feature-icon {
-      font-size: 23px;
-      margin-bottom: 5px;
+      font-size: 24px;
+      color: #a17b31;
     }
 
     .feature h3 {
       font-size: 13px;
-      margin-bottom: 3px;
     }
 
     .feature p {
-      color: var(--muted);
       font-size: 11px;
+      color: var(--muted);
     }
 
     .section {
-      padding: 65px 5%;
+      padding: 60px 5%;
     }
 
     .section-heading {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
     }
 
     .section-heading .eyebrow {
       margin-bottom: 8px;
     }
 
-    .section-heading h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(28px, 4vw, 40px);
+    .section-heading h2,
+    .about h2,
+    .contact h2 {
+      font-family: Georgia, serif;
       font-weight: normal;
+      font-size: clamp(28px, 4vw, 40px);
     }
 
     .section-heading p {
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       margin-top: 8px;
     }
 
     .categories {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 48px;
+      gap: 14px;
+      margin-bottom: 45px;
     }
 
     .category-card {
+      min-height: 105px;
+      padding: 18px 8px;
       background: var(--black);
-      color: var(--white);
-      border: 1px solid #333333;
-      min-height: 110px;
-      padding: 20px 12px;
-      text-align: center;
-      transition: 0.2s;
-    }
-
-    .category-card:hover,
-    .category-card.active {
-      background: var(--gold);
-      color: var(--black);
-      border-color: var(--gold);
+      color: white;
+      border: 1px solid var(--black);
+      transition: .2s;
     }
 
     .category-card span {
@@ -260,17 +238,24 @@
       font-size: 12px;
     }
 
+    .category-card:hover,
+    .category-card.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
     .shop-toolbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      align-items: center;
       flex-wrap: wrap;
+      gap: 15px;
       margin-bottom: 24px;
     }
 
     .shop-toolbar h3 {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Georgia, serif;
       font-size: 25px;
       font-weight: normal;
     }
@@ -278,9 +263,9 @@
     .search-box {
       width: 100%;
       max-width: 320px;
-      padding: 12px 14px;
-      background: var(--white);
+      padding: 12px;
       border: 1px solid var(--border);
+      background: white;
       outline: none;
     }
 
@@ -291,57 +276,51 @@
     .product-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 22px;
+      gap: 20px;
     }
 
     .product-card {
-      background: var(--white);
+      background: white;
       border: 1px solid var(--border);
       overflow: hidden;
-      transition: 0.25s;
+      transition: .2s;
     }
 
     .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 22px rgba(0,0,0,.07);
     }
 
     .product-image-wrap {
       position: relative;
-      background: #eeeeee;
       aspect-ratio: 1 / 1;
+      background: #eeeeee;
       overflow: hidden;
     }
 
     .product-image {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
-      transition: transform 0.3s;
-    }
-
-    .product-card:hover .product-image {
-      transform: scale(1.04);
     }
 
     .product-category {
       position: absolute;
-      left: 10px;
       top: 10px;
+      left: 10px;
+      background: white;
       padding: 5px 8px;
-      background: var(--white);
-      font-size: 10px;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .product-info {
-      padding: 17px;
+      padding: 15px;
     }
 
     .product-name {
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.4;
       margin-bottom: 8px;
       overflow-wrap: anywhere;
@@ -363,32 +342,32 @@
     }
 
     .product-price {
-      color: #8b6b2e;
-      font-size: 17px;
+      font-size: 15px;
       font-weight: bold;
+      color: #8b6b2e;
     }
 
     .product-button {
-      border: 1px solid var(--black);
       background: var(--black);
-      color: var(--white);
+      color: white;
+      border: 1px solid var(--black);
       padding: 8px 10px;
-      font-size: 11px;
+      font-size: 10px;
     }
 
     .product-button:hover {
       background: var(--gold);
-      border-color: var(--gold);
       color: var(--black);
+      border-color: var(--gold);
     }
 
     .status-message {
       grid-column: 1 / -1;
-      background: var(--white);
-      padding: 35px 20px;
+      background: white;
+      padding: 30px 18px;
       text-align: center;
-      color: var(--muted);
       border: 1px solid var(--border);
+      color: var(--muted);
     }
 
     .status-message strong {
@@ -398,41 +377,35 @@
       margin-bottom: 8px;
     }
 
-    .status-message button {
+    .status-message .button {
       margin-top: 15px;
     }
 
     .about {
       background: var(--black);
-      color: var(--white);
+      color: white;
       text-align: center;
       padding: 65px 7%;
     }
 
     .about h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: normal;
       margin-bottom: 18px;
     }
 
     .about p {
-      color: #cccccc;
       max-width: 650px;
-      margin: 0 auto;
+      margin: auto;
+      color: #cccccc;
       font-size: 14px;
     }
 
     .contact {
-      text-align: center;
-      padding: 55px 5%;
       background: #eee9df;
+      padding: 55px 5%;
+      text-align: center;
     }
 
     .contact h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 32px;
-      font-weight: normal;
       margin-bottom: 10px;
     }
 
@@ -440,6 +413,26 @@
       color: #666666;
       font-size: 14px;
       margin-bottom: 22px;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .whatsapp-button {
+      display: inline-block;
+      padding: 13px 20px;
+      background: #167b43;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .whatsapp-button:hover {
+      background: #105d32;
     }
 
     footer {
@@ -452,9 +445,9 @@
 
     footer .footer-brand {
       color: var(--gold);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 19px;
-      margin-bottom: 7px;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      margin-bottom: 5px;
     }
 
     footer p {
@@ -481,20 +474,20 @@
       }
 
       nav {
-        gap: 14px;
+        gap: 12px;
       }
 
       nav a {
-        font-size: 12px;
+        font-size: 11px;
       }
 
       .hero {
-        min-height: 390px;
-        padding: 55px 6%;
+        min-height: 380px;
+        padding: 50px 6%;
       }
 
       .features {
-        padding: 20px 2%;
+        padding: 18px 2%;
       }
 
       .feature h3 {
@@ -502,7 +495,7 @@
       }
 
       .feature p {
-        font-size: 10px;
+        font-size: 9px;
       }
 
       .section {
@@ -515,36 +508,24 @@
       }
 
       .product-info {
-        padding: 12px;
+        padding: 11px;
       }
 
       .product-name {
         font-size: 13px;
       }
 
-      .product-description {
-        font-size: 11px;
-      }
-
       .product-price {
-        font-size: 14px;
+        font-size: 13px;
       }
 
       .product-button {
-        padding: 8px;
-        font-size: 10px;
+        padding: 7px;
+        font-size: 9px;
       }
 
       .search-box {
         max-width: 100%;
-      }
-
-      .shop-toolbar {
-        align-items: stretch;
-      }
-
-      .category-card {
-        min-height: 95px;
       }
     }
   </style>
@@ -553,11 +534,11 @@
 <body>
 
   <div class="announcement">
-    WELCOME TO ENZO ANNIE — YOUR HOME FOR STYLE & TECHNOLOGY
+    WELCOME TO ENZO ANNIE — STYLE, QUALITY & TECHNOLOGY
   </div>
 
   <header>
-    <a href="#home" class="brand">
+    <a href="#home">
       <span class="brand-name">ENZO ANNIE</span>
       <span class="brand-subtitle">Luxury Lighting & Electronics</span>
     </a>
@@ -566,12 +547,13 @@
       <a href="#home">Home</a>
       <a href="#shop">Shop</a>
       <a href="#categories">Categories</a>
-      <a href="#about">About Us</a>
+      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main>
+
     <section class="hero" id="home">
       <div class="hero-content">
         <div class="eyebrow">Elegance Meets Innovation</div>
@@ -580,15 +562,15 @@
 
         <p>
           Discover stylish lighting, quality electronics, and carefully
-          selected accessories designed to bring comfort, beauty, and
-          modern technology into your everyday life.
+          selected accessories designed to bring beauty, convenience,
+          and modern technology into your everyday life.
         </p>
 
         <a href="#shop" class="button">EXPLORE OUR COLLECTION</a>
       </div>
     </section>
 
-    <section class="features" aria-label="Store highlights">
+    <section class="features">
       <div class="feature">
         <div class="feature-icon">✦</div>
         <h3>Quality Selection</h3>
@@ -675,33 +657,29 @@
     </section>
 
     <section class="contact" id="contact">
-      <h2>Need Help Finding Something?</h2>
+      <h2>We're Here to Help</h2>
 
       <p>
-        Explore our products and get in touch with us for enquiries
-        about an item you're interested in.
+        Have a question about a product? Contact us directly on WhatsApp.
       </p>
 
-      <a href="#shop" class="button">BROWSE PRODUCTS</a>
+      <div class="contact-buttons" id="whatsapp-buttons">
+        <span>Loading contact options...</span>
+      </div>
     </section>
 
   </main>
 
   <footer>
     <div class="footer-brand">ENZO ANNIE</div>
-
     <p>Luxury Lighting & Electronics</p>
-
-    <p>
-      &copy; <span id="current-year"></span>
-      Enzo Annie. All rights reserved.
-    </p>
+    <p>&copy; <span id="current-year"></span> Enzo Annie. All rights reserved.</p>
   </footer>
 
   <!-- Supabase JavaScript library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Your Supabase project configuration -->
+  <!-- Your existing configuration file -->
   <script src="config.js"></script>
 
   <script>
@@ -711,6 +689,7 @@
       const grid = document.getElementById("product-grid");
       const searchInput = document.getElementById("search-input");
       const shopTitle = document.getElementById("shop-title");
+      const whatsappButtons = document.getElementById("whatsapp-buttons");
 
       let allProducts = [];
       let selectedCategory = "All";
@@ -718,6 +697,7 @@
       document.getElementById("current-year").textContent =
         new Date().getFullYear();
 
+      // Safely display messages.
       function showMessage(title, message, buttonText, buttonAction) {
         grid.replaceChildren();
 
@@ -743,6 +723,7 @@
         grid.appendChild(box);
       }
 
+      // Display prices in Nigerian Naira.
       function formatPrice(price) {
         const amount = Number(price);
 
@@ -757,6 +738,7 @@
         }).format(amount);
       }
 
+      // Create a product card.
       function makeProductCard(product) {
         const card = document.createElement("article");
         card.className = "product-card";
@@ -768,13 +750,18 @@
         image.className = "product-image";
         image.alt = product.name || "Store product";
         image.loading = "lazy";
-        image.src = product.image_url || "";
+
+        if (product.image_url) {
+          image.src = product.image_url;
+        } else {
+          image.style.display = "none";
+          imageWrap.textContent = "Image unavailable";
+          imageWrap.style.display = "grid";
+          imageWrap.style.placeItems = "center";
+        }
 
         image.addEventListener("error", () => {
-          image.removeAttribute("src");
-          image.alt = "Product image unavailable";
           image.style.display = "none";
-
           imageWrap.style.display = "grid";
           imageWrap.style.placeItems = "center";
 
@@ -786,7 +773,9 @@
           imageWrap.appendChild(placeholder);
         }, { once: true });
 
-        imageWrap.appendChild(image);
+        if (product.image_url) {
+          imageWrap.appendChild(image);
+        }
 
         const badge = document.createElement("span");
         badge.className = "product-category";
@@ -813,17 +802,32 @@
 
         const button = document.createElement("button");
         button.className = "product-button";
-        button.textContent = "View Details";
+        button.textContent = "Enquire";
 
         button.addEventListener("click", () => {
-          const detail = [
-            product.name || "Product",
-            "Price: " + formatPrice(product.price),
-            "Category: " + (product.category || "General"),
-            product.description || ""
-          ].join("\n\n");
+          const config = window.STORE_CONFIG || {};
 
-          window.alert(detail);
+          const number = String(
+            config.WHATSAPP_NUMBER_1 || ""
+          ).replace(/\D/g, "");
+
+          if (!number) {
+            window.alert("Please contact the store for product enquiries.");
+            return;
+          }
+
+          const message =
+            "Hello Enzo Annie! I am interested in this product:\n\n" +
+            "Product: " + (product.name || "Product") + "\n" +
+            "Price: " + formatPrice(product.price) + "\n" +
+            "Category: " + (product.category || "General") + "\n\n" +
+            "Please provide more details.";
+
+          const url =
+            "https://wa.me/" + number +
+            "?text=" + encodeURIComponent(message);
+
+          window.open(url, "_blank", "noopener,noreferrer");
         });
 
         bottom.append(price, button);
@@ -833,6 +837,7 @@
         return card;
       }
 
+      // Filter products by category and search.
       function renderProducts() {
         const searchTerm = searchInput.value.trim().toLowerCase();
 
@@ -848,7 +853,8 @@
             product.description
           ].join(" ").toLowerCase();
 
-          return matchesCategory && searchableText.includes(searchTerm);
+          return matchesCategory &&
+            searchableText.includes(searchTerm);
         });
 
         shopTitle.textContent =
@@ -864,7 +870,7 @@
               ? "Our collection is coming soon"
               : "No matching products found",
             allProducts.length === 0
-              ? "Products will appear here once they have been added to our store."
+              ? "Products will appear here once they have been added to our database."
               : "Try another search or choose a different category.",
             "View All Products",
             () => {
@@ -910,26 +916,73 @@
 
       searchInput.addEventListener("input", renderProducts);
 
+      // Create WhatsApp contact buttons using config.js.
+      function setupWhatsApp() {
+        const config = window.STORE_CONFIG || {};
+
+        whatsappButtons.replaceChildren();
+
+        const numbers = [
+          {
+            number: config.WHATSAPP_NUMBER_1,
+            label: "Chat on WhatsApp"
+          },
+          {
+            number: config.WHATSAPP_NUMBER_2,
+            label: "Alternative WhatsApp"
+          }
+        ];
+
+        let count = 0;
+
+        numbers.forEach(item => {
+          const number = String(item.number || "").replace(/\D/g, "");
+
+          if (!number) {
+            return;
+          }
+
+          const link = document.createElement("a");
+          link.className = "whatsapp-button";
+          link.href = "https://wa.me/" + number;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = item.label;
+
+          whatsappButtons.appendChild(link);
+          count++;
+        });
+
+        if (count === 0) {
+          const message = document.createElement("p");
+          message.textContent =
+            "Please check the WhatsApp numbers in config.js.";
+          whatsappButtons.appendChild(message);
+        }
+      }
+
+      // Connect to Supabase and load products.
       async function loadProducts() {
+        const config = window.STORE_CONFIG;
+
         if (
           !window.supabase ||
-          typeof window.SUPABASE_URL !== "string" ||
-          typeof window.SUPABASE_ANON_KEY !== "string" ||
-          !window.SUPABASE_URL ||
-          !window.SUPABASE_ANON_KEY ||
-          window.SUPABASE_ANON_KEY.includes("PASTE_YOUR")
+          !config ||
+          !config.SUPABASE_URL ||
+          config.SUPABASE_URL === "YOUR_SUPABASE_PROJECT_URL" ||
+          !config.SUPABASE_ANON_KEY
         ) {
           showMessage(
             "Store configuration needed",
-            "Please check that config.js contains your Supabase project URL and publishable key."
+            "Please check the Supabase project URL and publishable key in config.js."
           );
           return;
         }
 
         try {
           const client = window.supabase.createClient(
-            window.SUPABASE_URL,
-            window.SUPABASE_ANON_KEY
+            config.SUPABASE_URL,
+            config.SUPABASE_ANON_KEY
           );
 
           const { data, error } = await client
@@ -938,11 +991,11 @@
             .order("created_at", { ascending: false });
 
           if (error) {
-            console.error("Supabase product error:", error);
+            console.error("Supabase error:", error);
 
             showMessage(
-              "We couldn't load the products",
-              "Please try again later. If the problem continues, the store database permissions may need checking.",
+              "Unable to load products",
+              "Please try again. The database permissions or configuration may need checking.",
               "Try Again",
               loadProducts
             );
@@ -954,7 +1007,7 @@
           renderProducts();
 
         } catch (error) {
-          console.error("Store loading error:", error);
+          console.error("Store error:", error);
 
           showMessage(
             "Something went wrong",
@@ -965,7 +1018,9 @@
         }
       }
 
+      setupWhatsApp();
       loadProducts();
+
     })();
   </script>
 
