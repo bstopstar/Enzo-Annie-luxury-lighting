@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Admin Dashboard | Enzo Annie Luxury</title>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
-
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">  <title>Admin Dashboard | Enzo Annie Luxury</title>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script src="config.js"></script>  <style>
     :root {
       --gold: #d4af37;
       --gold-light: #f3d879;
@@ -22,9 +14,7 @@
       --green: #28a745;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -34,15 +24,8 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    button,
-    input,
-    textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
 
     .container {
       max-width: 1100px;
@@ -72,10 +55,7 @@
       box-shadow: 0 5px 20px #0005;
     }
 
-    h2 {
-      color: var(--gold);
-      margin-top: 0;
-    }
+    h2 { color: var(--gold); margin-top: 0; }
 
     label {
       display: block;
@@ -84,8 +64,7 @@
       font-weight: bold;
     }
 
-    input,
-    textarea {
+    input, textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #444;
@@ -95,19 +74,14 @@
       outline: none;
     }
 
-    input:focus,
-    textarea:focus {
-      border-color: var(--gold);
-    }
+    input:focus, textarea:focus { border-color: var(--gold); }
 
     textarea {
       min-height: 100px;
       resize: vertical;
     }
 
-    input[type="file"] {
-      padding: 10px;
-    }
+    input[type="file"] { padding: 10px; }
 
     .main-button {
       background: var(--gold);
@@ -120,9 +94,7 @@
       margin-top: 20px;
     }
 
-    .main-button:hover {
-      background: var(--gold-light);
-    }
+    .main-button:hover { background: var(--gold-light); }
 
     button:disabled {
       opacity: 0.6;
@@ -137,9 +109,7 @@
       padding: 10px 14px;
     }
 
-    .secondary-button:hover {
-      background: #29220c;
-    }
+    .secondary-button:hover { background: #29220c; }
 
     .danger-button {
       background: var(--red);
@@ -202,15 +172,71 @@
       color: var(--gold-light);
     }
 
-    .preview {
-      display: none;
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 7px;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
       margin-top: 15px;
-      max-width: 200px;
-      max-height: 200px;
-      object-fit: contain;
-      border-radius: 8px;
-      border: 1px solid #444;
+    }
+
+    .image-item {
+      position: relative;
+      min-width: 0;
       background: #090909;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 7px;
+      overflow: hidden;
+    }
+
+    .image-item img {
+      display: block;
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 5px;
+      background: #111;
+    }
+
+    .image-item .image-label {
+      color: var(--gold-light);
+      font-size: 12px;
+      margin: 7px 0 3px;
+      overflow-wrap: anywhere;
+    }
+
+    .image-item .remove-image {
+      width: 100%;
+      border: 1px solid #8e3333;
+      color: #ffb8b8;
+      background: #351515;
+      border-radius: 5px;
+      padding: 7px 5px;
+      margin-top: 7px;
+      font-size: 12px;
+    }
+
+    .image-item .remove-image:hover { background: #512020; }
+
+    .image-item.main-image {
+      border-color: var(--gold);
+    }
+
+    .main-badge {
+      display: inline-block;
+      font-size: 11px;
+      color: #111;
+      background: var(--gold);
+      padding: 4px 6px;
+      border-radius: 4px;
+      margin-top: 5px;
     }
 
     .products-grid {
@@ -272,9 +298,7 @@
       padding: 25px 10px;
     }
 
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
 
     .form-actions {
       display: flex;
@@ -282,207 +306,166 @@
       align-items: center;
     }
 
-    .form-actions .main-button {
-      flex: 1;
-    }
-
-    .form-actions .secondary-button {
-      margin-top: 20px;
-    }
-
-    .hint {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-      margin-top: 7px;
-    }
+    .form-actions .main-button { flex: 1; }
+    .form-actions .secondary-button { margin-top: 20px; }
 
     @media (max-width: 600px) {
-      body {
-        padding: 12px;
-      }
-
-      .card {
-        padding: 16px;
-      }
-
-      .brand {
-        font-size: 23px;
-      }
+      body { padding: 12px; }
+      .card { padding: 16px; }
+      .brand { font-size: 23px; }
 
       .form-actions {
         flex-direction: column;
         align-items: stretch;
       }
 
-      .form-actions .secondary-button {
-        margin-top: 0;
-      }
-
-      .product-card img {
-        height: 170px;
-      }
+      .form-actions .secondary-button { margin-top: 0; }
+      .product-card img { height: 170px; }
+      .image-item img { height: 100px; }
     }
-  </style>
-</head>
+  </style></head><body>
+  <div class="container"><h1 class="brand">ENZO ANNIE LUXURY</h1>
+<p class="subtitle">Admin Dashboard</p>
 
-<body>
-  <div class="container">
+<section class="card" id="loginSection">
+  <h2>Admin Login</h2>
 
-    <h1 class="brand">ENZO ANNIE LUXURY</h1>
-    <p class="subtitle">Admin Dashboard</p>
+  <form id="loginForm">
+    <label for="email">Email Address</label>
+    <input
+      type="email"
+      id="email"
+      autocomplete="username"
+      placeholder="Enter your admin email"
+      required
+    >
 
-    <!-- LOGIN SECTION -->
-    <section class="card" id="loginSection">
-      <h2>Admin Login</h2>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      autocomplete="current-password"
+      placeholder="Enter your password"
+      required
+    >
 
-      <form id="loginForm">
-        <label for="email">Email Address</label>
-        <input
-          type="email"
-          id="email"
-          autocomplete="username"
-          placeholder="Enter your admin email"
-          required
-        >
+    <button class="main-button" id="loginButton" type="submit">
+      Login to Dashboard
+    </button>
+  </form>
 
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          autocomplete="current-password"
-          placeholder="Enter your password"
-          required
-        >
+  <div class="message" id="loginMessage" role="status"></div>
+</section>
 
-        <button class="main-button" id="loginButton" type="submit">
-          Login to Dashboard
+<section id="dashboardSection" class="hidden">
+
+  <button class="logout-button" id="logoutButton" type="button">
+    Logout
+  </button>
+
+  <section class="card" id="productFormCard">
+    <h2 id="formHeading">Add New Product</h2>
+
+    <p class="hint" id="formDescription">
+      Fill in the product details and choose up to five images.
+    </p>
+
+    <form id="productForm">
+
+      <label for="productName">Product Name</label>
+      <input
+        type="text"
+        id="productName"
+        placeholder="Enter product name"
+        maxlength="200"
+        required
+      >
+
+      <label for="productPrice">Price (₦)</label>
+      <input
+        type="number"
+        id="productPrice"
+        placeholder="Enter product price"
+        min="0"
+        step="0.01"
+        required
+      >
+
+      <label for="productCategory">Category</label>
+      <input
+        type="text"
+        id="productCategory"
+        placeholder="e.g. Lighting, Electronics"
+        maxlength="100"
+        required
+      >
+
+      <label for="productDescription">Product Description</label>
+      <textarea
+        id="productDescription"
+        placeholder="Describe the product"
+        maxlength="5000"
+      ></textarea>
+
+      <label for="imageFile">Product Images (Up to 5)</label>
+
+      <input
+        type="file"
+        id="imageFile"
+        accept="image/jpeg,image/png,image/webp"
+        multiple
+        required
+      >
+
+      <p class="hint" id="imageHint">
+        Select up to 5 JPG, PNG, or WebP images. Maximum 5 MB per image.
+        The first image will be the main product image.
+      </p>
+
+      <div id="imagePreviewGrid" class="image-grid"></div>
+
+      <div class="form-actions">
+        <button class="main-button" id="saveProductButton" type="submit">
+          Add Product
         </button>
-      </form>
 
-      <div class="message" id="loginMessage" role="status"></div>
-    </section>
+        <button
+          class="secondary-button hidden"
+          id="cancelEditButton"
+          type="button"
+        >
+          Cancel Edit
+        </button>
+      </div>
+    </form>
 
-    <!-- DASHBOARD SECTION -->
-    <section id="dashboardSection" class="hidden">
+    <div class="message" id="formMessage" role="status"></div>
+  </section>
 
-      <button class="logout-button" id="logoutButton" type="button">
-        Logout
-      </button>
+  <section class="card">
+    <h2>Your Products</h2>
 
-      <!-- ADD / EDIT PRODUCT FORM -->
-      <section class="card" id="productFormCard">
-        <h2 id="formHeading">Add New Product</h2>
+    <p class="hint">
+      Edit product details and images, or delete a product completely.
+    </p>
 
-        <p class="hint" id="formDescription">
-          Fill in the product details and select an image to upload a new product.
-        </p>
+    <div class="message" id="listMessage" role="status"></div>
 
-        <form id="productForm">
+    <div id="productsGrid" class="products-grid">
+      <p class="empty-state">Loading products...</p>
+    </div>
+  </section>
 
-          <label for="productName">Product Name</label>
-          <input
-            type="text"
-            id="productName"
-            placeholder="Enter product name"
-            maxlength="200"
-            required
-          >
+</section>
 
-          <label for="productPrice">Price (₦)</label>
-          <input
-            type="number"
-            id="productPrice"
-            placeholder="Enter product price"
-            min="0"
-            step="0.01"
-            required
-          >
-
-          <label for="productCategory">Category</label>
-          <input
-            type="text"
-            id="productCategory"
-            placeholder="e.g. Lighting, Electronics"
-            maxlength="100"
-            required
-          >
-
-          <label for="productDescription">Product Description</label>
-          <textarea
-            id="productDescription"
-            placeholder="Describe the product"
-            maxlength="5000"
-          ></textarea>
-
-          <label for="imageFile" id="imageLabel">
-            Product Image
-          </label>
-
-          <input
-            type="file"
-            id="imageFile"
-            accept="image/jpeg,image/png,image/webp"
-            required
-          >
-
-          <p class="hint" id="imageHint">
-            Accepted formats: JPG, PNG, WebP. Maximum file size: 5 MB.
-          </p>
-
-          <img
-            id="imagePreview"
-            class="preview"
-            alt="Product image preview"
-          >
-
-          <div class="form-actions">
-            <button
-              class="main-button"
-              id="saveProductButton"
-              type="submit"
-            >
-              Add Product
-            </button>
-
-            <button
-              class="secondary-button hidden"
-              id="cancelEditButton"
-              type="button"
-            >
-              Cancel Edit
-            </button>
-          </div>
-        </form>
-
-        <div class="message" id="formMessage" role="status"></div>
-      </section>
-
-      <!-- PRODUCT LIST -->
-      <section class="card">
-        <h2>Your Products</h2>
-
-        <p class="hint">
-          Select Edit Product to change an item's details, or Delete Product to remove it.
-        </p>
-
-        <div class="message" id="listMessage" role="status"></div>
-
-        <div id="productsGrid" class="products-grid">
-          <p class="empty-state">Loading products...</p>
-        </div>
-      </section>
-
-    </section>
-  </div>
-
-  <script>
+  </div>  <script>
     (() => {
       "use strict";
 
       const ADMIN_UID = "e3e5a6cc-476a-425b-8c4d-10efccd6e26e";
       const BUCKET_NAME = "product-images";
       const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+      const MAX_IMAGES = 5;
 
       const ALLOWED_IMAGE_TYPES = [
         "image/jpeg",
@@ -500,7 +483,7 @@
         document.body.innerHTML = `
           <div style="max-width:600px;margin:60px auto;padding:20px;color:white;font-family:Arial">
             <h2 style="color:#d4af37">Configuration Error</h2>
-            <p>Could not find your Supabase settings. Please check your config.js file.</p>
+            <p>Could not find your Supabase settings. Please check config.js.</p>
           </div>
         `;
         return;
@@ -515,7 +498,6 @@
 
       const loginSection = $("loginSection");
       const dashboardSection = $("dashboardSection");
-
       const loginForm = $("loginForm");
       const loginButton = $("loginButton");
       const loginMessage = $("loginMessage");
@@ -533,22 +515,21 @@
       const productCategory = $("productCategory");
       const productDescription = $("productDescription");
       const imageFile = $("imageFile");
-      const imageLabel = $("imageLabel");
       const imageHint = $("imageHint");
-      const imagePreview = $("imagePreview");
+      const imagePreviewGrid = $("imagePreviewGrid");
 
       const productsGrid = $("productsGrid");
       const listMessage = $("listMessage");
 
       let currentUser = null;
       let editingProduct = null;
-      let previewObjectUrl = null;
       let loadingProducts = false;
       let submittingProduct = false;
 
-      // ------------------------------
-      // MESSAGES
-      // ------------------------------
+      // Selected images contain either an existing URL or a new File.
+      // Their order determines which image is the main image.
+      let selectedImages = [];
+      let previewUrls = [];
 
       function showMessage(element, message, type = "info") {
         element.textContent = message;
@@ -566,74 +547,161 @@
       }
 
       // ------------------------------
-      // IMAGE PREVIEW
+      // IMAGE SELECTION AND PREVIEW
       // ------------------------------
 
-      function clearPreview() {
-        if (previewObjectUrl) {
-          URL.revokeObjectURL(previewObjectUrl);
-          previewObjectUrl = null;
-        }
-
-        imagePreview.removeAttribute("src");
-        imagePreview.style.display = "none";
+      function releasePreviewUrls() {
+        previewUrls.forEach((url) => URL.revokeObjectURL(url));
+        previewUrls = [];
       }
 
-      function showPreview(file) {
-        clearPreview();
+      function renderImagePreviews() {
+        releasePreviewUrls();
+        imagePreviewGrid.innerHTML = "";
 
-        if (!file) {
+        if (selectedImages.length === 0) {
+          const empty = document.createElement("p");
+          empty.className = "hint";
+          empty.textContent = editingProduct
+            ? "No images selected. Add an image below to upload one."
+            : "Your selected images will appear here.";
+          imagePreviewGrid.appendChild(empty);
           return;
         }
 
-        previewObjectUrl = URL.createObjectURL(file);
-        imagePreview.src = previewObjectUrl;
-        imagePreview.style.display = "block";
-      }
+        selectedImages.forEach((item, index) => {
+          const wrapper = document.createElement("div");
+          wrapper.className = "image-item";
 
-      imageFile.addEventListener("change", () => {
-        const file = imageFile.files[0];
-
-        if (!file) {
-          if (!editingProduct) {
-            clearPreview();
+          if (index === 0) {
+            wrapper.classList.add("main-image");
           }
-          return;
-        }
 
+          const img = document.createElement("img");
+
+          if (item.kind === "file") {
+            const objectUrl = URL.createObjectURL(item.file);
+            previewUrls.push(objectUrl);
+            img.src = objectUrl;
+          } else {
+            img.src = item.url;
+          }
+
+          img.alt = "Product image " + (index + 1);
+
+          const label = document.createElement("div");
+          label.className = "image-label";
+          label.textContent =
+            item.kind === "file"
+              ? item.file.name
+              : "Existing image " + (index + 1);
+
+          wrapper.appendChild(img);
+          wrapper.appendChild(label);
+
+          if (index === 0) {
+            const badge = document.createElement("span");
+            badge.className = "main-badge";
+            badge.textContent = "MAIN IMAGE";
+            wrapper.appendChild(badge);
+          }
+
+          const removeButton = document.createElement("button");
+          removeButton.type = "button";
+          removeButton.className = "remove-image";
+          removeButton.textContent = "Remove Image";
+
+          removeButton.addEventListener("click", () => {
+            selectedImages.splice(index, 1);
+            syncFileInput();
+            renderImagePreviews();
+            updateImageHint();
+            clearMessage(formMessage);
+          });
+
+          wrapper.appendChild(removeButton);
+          imagePreviewGrid.appendChild(wrapper);
+        });
+      }
+
+      function syncFileInput() {
+        // Existing URLs are not represented in the browser file input.
+        // Keep only newly selected files in it.
+        const files = selectedImages
+          .filter((item) => item.kind === "file")
+          .map((item) => item.file);
+
+        const transfer = new DataTransfer();
+
+        files.forEach((file) => transfer.items.add(file));
+        imageFile.files = transfer.files;
+      }
+
+      function updateImageHint() {
+        const remaining = MAX_IMAGES - selectedImages.length;
+
+        if (editingProduct) {
+          imageHint.textContent =
+            selectedImages.length +
+            " of " + MAX_IMAGES +
+            " images selected. You can keep, remove, or add images. " +
+            "Each new image must be JPG, PNG, or WebP and no larger than 5 MB.";
+        } else {
+          imageHint.textContent =
+            selectedImages.length +
+            " of " + MAX_IMAGES +
+            " images selected. " +
+            (remaining > 0
+              ? "You can select " + remaining + " more."
+              : "Maximum reached.") +
+            " The first image is the main image.";
+        }
+      }
+
+      function validateImageFile(file) {
         if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-          imageFile.value = "";
-          showMessage(
-            formMessage,
-            "Please select a JPG, PNG, or WebP image.",
-            "error"
+          throw new Error(
+            '"' + file.name + '" is not supported. Use JPG, PNG, or WebP.'
           );
-
-          if (!editingProduct) {
-            clearPreview();
-          }
-
-          return;
         }
 
         if (file.size > MAX_IMAGE_SIZE) {
-          imageFile.value = "";
-
-          showMessage(
-            formMessage,
-            "The image is too large. Please select an image smaller than 5 MB.",
-            "error"
+          throw new Error(
+            '"' + file.name + '" exceeds the 5 MB size limit.'
           );
+        }
+      }
 
-          if (!editingProduct) {
-            clearPreview();
+      imageFile.addEventListener("change", () => {
+        clearMessage(formMessage);
+
+        try {
+          const newFiles = Array.from(imageFile.files || []);
+
+          if (selectedImages.length + newFiles.length > MAX_IMAGES) {
+            throw new Error(
+              "You can upload a maximum of 5 images per product. " +
+              "You currently have " + selectedImages.length +
+              " image(s) selected."
+            );
           }
 
-          return;
-        }
+          newFiles.forEach(validateImageFile);
 
-        clearMessage(formMessage);
-        showPreview(file);
+          newFiles.forEach((file) => {
+            selectedImages.push({
+              kind: "file",
+              file
+            });
+          });
+
+          syncFileInput();
+          renderImagePreviews();
+          updateImageHint();
+
+        } catch (error) {
+          showMessage(formMessage, error.message, "error");
+        }
       });
 
       // ------------------------------
@@ -670,10 +738,8 @@
         }
 
         currentUser = user;
-
         loginSection.classList.add("hidden");
         dashboardSection.classList.remove("hidden");
-
         clearMessage(loginMessage);
 
         await loadProducts();
@@ -681,7 +747,6 @@
 
       loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-
         clearMessage(loginMessage);
 
         setButtonLoading(
@@ -700,9 +765,7 @@
             password
           });
 
-          if (error) {
-            throw error;
-          }
+          if (error) throw error;
 
           if (!data.user || data.user.id !== ADMIN_UID) {
             await client.auth.signOut();
@@ -735,11 +798,9 @@
 
         try {
           await client.auth.signOut();
-
           resetProductForm();
 
           currentUser = null;
-
           dashboardSection.classList.add("hidden");
           loginSection.classList.remove("hidden");
 
@@ -756,10 +817,8 @@
       client.auth.onAuthStateChange((event, session) => {
         if (event === "SIGNED_OUT" || !session) {
           currentUser = null;
-
           dashboardSection.classList.add("hidden");
           loginSection.classList.remove("hidden");
-
           resetProductForm();
         }
       });
@@ -769,34 +828,26 @@
       // ------------------------------
 
       function getStoragePath(imageUrl) {
-        if (!imageUrl || !config.SUPABASE_URL) {
-          return null;
-        }
+        if (!imageUrl || !config.SUPABASE_URL) return null;
 
         try {
           const image = new URL(imageUrl);
           const project = new URL(config.SUPABASE_URL);
 
-          if (image.origin !== project.origin) {
-            return null;
-          }
+          if (image.origin !== project.origin) return null;
 
           const marker =
             "/storage/v1/object/public/" + BUCKET_NAME + "/";
 
           const markerIndex = image.pathname.indexOf(marker);
 
-          if (markerIndex === -1) {
-            return null;
-          }
+          if (markerIndex === -1) return null;
 
           const encodedPath = image.pathname.slice(
             markerIndex + marker.length
           );
 
-          if (!encodedPath) {
-            return null;
-          }
+          if (!encodedPath) return null;
 
           return encodedPath
             .split("/")
@@ -814,12 +865,9 @@
           .slice(-120);
 
         const filePath =
-          user.id +
-          "/" +
-          Date.now() +
-          "-" +
-          Math.random().toString(36).slice(2, 10) +
-          "-" +
+          user.id + "/" +
+          Date.now() + "-" +
+          Math.random().toString(36).slice(2, 10) + "-" +
           safeFileName;
 
         const { error } = await client.storage
@@ -830,9 +878,7 @@
             contentType: file.type
           });
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
         const { data } = client.storage
           .from(BUCKET_NAME)
@@ -844,23 +890,35 @@
         };
       }
 
-      async function removeStorageImage(imageUrl) {
-        const path = getStoragePath(imageUrl);
+      async function removeStorageImages(imageUrls) {
+        const paths = [...new Set(
+          (imageUrls || [])
+            .map(getStoragePath)
+            .filter(Boolean)
+        )];
 
-        if (!path) {
-          return;
-        }
+        if (!paths.length) return;
 
         const { error } = await client.storage
           .from(BUCKET_NAME)
-          .remove([path]);
+          .remove(paths);
 
         if (error) {
-          console.warn(
-            "The database operation succeeded, but the old image could not be removed:",
-            error.message
-          );
+          console.warn("Some old product images could not be removed:", error.message);
         }
+      }
+
+      function getProductImages(product) {
+        const extras = Array.isArray(product.gallery_images)
+          ? product.gallery_images
+          : [];
+
+        // The primary image is stored separately in image_url.
+        return [...new Set(
+          [product.image_url, ...extras].filter(
+            (url) => typeof url === "string" && url.trim()
+          )
+        )].slice(0, MAX_IMAGES);
       }
 
       // ------------------------------
@@ -869,24 +927,24 @@
 
       function resetProductForm() {
         editingProduct = null;
+        selectedImages = [];
+
+        releasePreviewUrls();
 
         productForm.reset();
-        clearPreview();
+        imagePreviewGrid.innerHTML = "";
         clearMessage(formMessage);
 
         formHeading.textContent = "Add New Product";
-
         formDescription.textContent =
-          "Fill in the product details and select an image to upload a new product.";
+          "Fill in the product details and choose up to five images.";
 
         saveProductButton.textContent = "Add Product";
-
-        imageLabel.textContent = "Product Image";
+        imageFile.required = true;
 
         imageHint.textContent =
-          "Accepted formats: JPG, PNG, WebP. Maximum file size: 5 MB.";
-
-        imageFile.required = true;
+          "Select up to 5 JPG, PNG, or WebP images. Maximum 5 MB per image. " +
+          "The first image will be the main product image.";
 
         cancelEditButton.classList.add("hidden");
 
@@ -895,20 +953,25 @@
         productCategory.disabled = false;
         productDescription.disabled = false;
         imageFile.disabled = false;
-
         saveProductButton.disabled = false;
+        cancelEditButton.disabled = false;
       }
 
       function startEditing(product) {
         editingProduct = product;
 
+        selectedImages = getProductImages(product).map((url) => ({
+          kind: "existing",
+          url
+        }));
+
         clearMessage(formMessage);
-        clearPreview();
+        releasePreviewUrls();
 
         formHeading.textContent = "Edit Product";
-
         formDescription.textContent =
-          "Change the details below and save your changes. You do not need to select a new image unless you want to replace the current one.";
+          "Update the product details and manage its images. " +
+          "Keep existing images, remove unwanted ones, or add new images.";
 
         productName.value = product.name || "";
         productPrice.value = product.price ?? "";
@@ -918,19 +981,11 @@
         imageFile.value = "";
         imageFile.required = false;
 
-        imageLabel.textContent = "Replace Product Image (Optional)";
-
-        imageHint.textContent =
-          "Leave this empty to keep the existing image. If replacing it, use JPG, PNG, or WebP, maximum 5 MB.";
-
-        if (product.image_url) {
-          imagePreview.src = product.image_url;
-          imagePreview.style.display = "block";
-        }
-
         saveProductButton.textContent = "Save Product Changes";
-
         cancelEditButton.classList.remove("hidden");
+
+        renderImagePreviews();
+        updateImageHint();
 
         productFormCard.scrollIntoView({
           behavior: "smooth",
@@ -947,20 +1002,21 @@
       productForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        if (submittingProduct) {
-          return;
-        }
+        if (submittingProduct) return;
 
         submittingProduct = true;
 
-        let uploadedImage = null;
+        const wasEditing = Boolean(editingProduct);
+        const productBeingEdited = editingProduct;
+
+        const newlyUploaded = [];
         let databaseUpdated = false;
 
         setButtonLoading(
           saveProductButton,
           true,
-          "Saving...",
-          editingProduct ? "Save Product Changes" : "Add Product"
+          "Saving images and product...",
+          wasEditing ? "Save Product Changes" : "Add Product"
         );
 
         cancelEditButton.disabled = true;
@@ -975,17 +1031,15 @@
           }
 
           const name = productName.value.trim();
-          const price = Number(productPrice.value);
+          const priceText = productPrice.value.trim();
+          const price = Number(priceText);
           const category = productCategory.value.trim();
           const description = productDescription.value.trim();
-          const file = imageFile.files[0];
 
-          if (!name) {
-            throw new Error("Please enter the product name.");
-          }
+          if (!name) throw new Error("Please enter the product name.");
 
           if (
-            productPrice.value.trim() === "" ||
+            priceText === "" ||
             !Number.isFinite(price) ||
             price < 0
           ) {
@@ -996,87 +1050,93 @@
             throw new Error("Please enter the product category.");
           }
 
-          if (!editingProduct && !file) {
-            throw new Error("Please select a product image.");
+          if (selectedImages.length === 0) {
+            throw new Error("Please select at least one product image.");
           }
 
-          if (file) {
-            if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-              throw new Error(
-                "Please select a JPG, PNG, or WebP image."
-              );
+          if (selectedImages.length > MAX_IMAGES) {
+            throw new Error("You can upload a maximum of 5 images.");
+          }
+
+          selectedImages.forEach((item) => {
+            if (item.kind === "file") validateImageFile(item.file);
+          });
+
+          // Upload newly selected files, keeping the selected order.
+          const finalImageUrls = [];
+
+          for (const item of selectedImages) {
+            if (item.kind === "existing") {
+              finalImageUrls.push(item.url);
+            } else {
+              const uploaded = await uploadImage(item.file, user);
+
+              newlyUploaded.push(uploaded);
+              finalImageUrls.push(uploaded.url);
             }
-
-            if (file.size > MAX_IMAGE_SIZE) {
-              throw new Error(
-                "The image must be smaller than 5 MB."
-              );
-            }
           }
 
-          let imageUrl = editingProduct
-            ? editingProduct.image_url
-            : null;
-
-          // Upload a replacement image first, if selected.
-          if (file) {
-            uploadedImage = await uploadImage(file, user);
-            imageUrl = uploadedImage.url;
-          }
+          const mainImageUrl = finalImageUrls[0];
+          const galleryImages = finalImageUrls.slice(1);
 
           const productData = {
             name,
             price,
             category,
             description,
-            image_url: imageUrl
+            image_url: mainImageUrl,
+            gallery_images: galleryImages
           };
 
-          if (editingProduct) {
-            const oldImageUrl = editingProduct.image_url;
+          if (wasEditing) {
+            const oldImageUrls = getProductImages(productBeingEdited);
 
             const { data, error } = await client
               .from("products")
               .update(productData)
-              .eq("id", editingProduct.id)
+              .eq("id", productBeingEdited.id)
               .select("id");
 
-            if (error) {
-              throw error;
-            }
+            if (error) throw error;
 
             if (!data || data.length === 0) {
               throw new Error(
-                "The product was not updated. Check your Supabase UPDATE policy and make sure you are logged in as the authorized admin."
+                "The product was not updated. Check your Supabase UPDATE policy."
               );
             }
 
             databaseUpdated = true;
 
-            // Remove the previous image only after the database update succeeds.
-            if (
-              file &&
-              oldImageUrl &&
-              oldImageUrl !== imageUrl
-            ) {
-              await removeStorageImage(oldImageUrl);
-            }
+            const retainedUrls = new Set(finalImageUrls);
+
+            const removedUrls = oldImageUrls.filter(
+              (url) => !retainedUrls.has(url)
+            );
+
+            // Delete removed images only after the database update succeeds.
+            await removeStorageImages(removedUrls);
 
             resetProductForm();
 
             showMessage(
               formMessage,
-              "Product updated successfully!",
+              "Product updated successfully with " +
+                finalImageUrls.length + " image(s)!",
               "success"
             );
 
           } else {
-            const { error } = await client
+            const { data, error } = await client
               .from("products")
-              .insert([productData]);
+              .insert([productData])
+              .select("id");
 
-            if (error) {
-              throw error;
+            if (error) throw error;
+
+            if (!data || data.length === 0) {
+              throw new Error(
+                "The product was not added. Please check your Supabase INSERT policy."
+              );
             }
 
             databaseUpdated = true;
@@ -1085,7 +1145,8 @@
 
             showMessage(
               formMessage,
-              "Product added successfully!",
+              "Product added successfully with " +
+                finalImageUrls.length + " image(s)!",
               "success"
             );
           }
@@ -1095,24 +1156,21 @@
         } catch (error) {
           console.error("Product save error:", error);
 
-          // If a newly uploaded image is not saved in the database,
-          // remove that new image to avoid leaving an unused file.
-          if (uploadedImage && !databaseUpdated) {
+          // Clean up only new uploads that were not successfully saved.
+          if (!databaseUpdated && newlyUploaded.length) {
             await client.storage
               .from(BUCKET_NAME)
-              .remove([uploadedImage.path]);
+              .remove(newlyUploaded.map((item) => item.path));
           }
 
           showMessage(
             formMessage,
-            error.message ||
-              "Could not save the product. Please try again.",
+            error.message || "Could not save the product. Please try again.",
             "error"
           );
 
         } finally {
           submittingProduct = false;
-
           saveProductButton.disabled = false;
           saveProductButton.textContent = editingProduct
             ? "Save Product Changes"
@@ -1127,9 +1185,7 @@
       // ------------------------------
 
       async function loadProducts() {
-        if (loadingProducts) {
-          return;
-        }
+        if (loadingProducts) return;
 
         loadingProducts = true;
 
@@ -1150,20 +1206,17 @@
           const { data: products, error } = await client
             .from("products")
             .select(
-              "id, name, price, category, description, image_url"
+              "id, name, price, category, description, image_url, gallery_images, created_at"
             )
             .order("created_at", { ascending: false });
 
-          if (error) {
-            throw error;
-          }
+          if (error) throw error;
 
           productsGrid.innerHTML = "";
 
           if (!products || products.length === 0) {
             productsGrid.innerHTML =
               '<p class="empty-state">No products have been added yet.</p>';
-
             return;
           }
 
@@ -1205,6 +1258,13 @@
 
             card.appendChild(price);
 
+            const imageCount = getProductImages(product).length;
+            const imageCountText = document.createElement("p");
+            imageCountText.textContent =
+              imageCount + " product image" +
+              (imageCount === 1 ? "" : "s");
+            card.appendChild(imageCountText);
+
             if (product.description) {
               const description = document.createElement("p");
               description.textContent = product.description;
@@ -1234,8 +1294,8 @@
 
             actions.appendChild(editButton);
             actions.appendChild(deleteButton);
-
             card.appendChild(actions);
+
             productsGrid.appendChild(card);
           });
 
@@ -1263,12 +1323,10 @@
         const confirmed = window.confirm(
           'Are you sure you want to delete "' +
           product.name +
-          '"? This action cannot be undone.'
+          '" and its product images? This cannot be undone.'
         );
 
-        if (!confirmed) {
-          return;
-        }
+        if (!confirmed) return;
 
         button.disabled = true;
         button.textContent = "Deleting...";
@@ -1288,9 +1346,7 @@
             .eq("id", product.id)
             .select("id");
 
-          if (error) {
-            throw error;
-          }
+          if (error) throw error;
 
           if (!data || data.length === 0) {
             throw new Error(
@@ -1305,17 +1361,11 @@
             resetProductForm();
           }
 
-          await removeStorageImage(product.image_url);
-
-          showMessage(
-            listMessage,
-            "Product deleted successfully.",
-            "success"
-          );
+          // Delete the database row first, then clean up all product images.
+          await removeStorageImages(getProductImages(product));
 
           await loadProducts();
 
-          // Restore the success message after refreshing the list.
           showMessage(
             listMessage,
             "Product deleted successfully.",
@@ -1347,9 +1397,7 @@
             error
           } = await client.auth.getSession();
 
-          if (error) {
-            throw error;
-          }
+          if (error) throw error;
 
           if (session && session.user) {
             await showDashboard(session.user);
@@ -1375,6 +1423,5 @@
       initializeDashboard();
 
     })();
-  </script>
-</body>
+  </script></body>
 </html>
