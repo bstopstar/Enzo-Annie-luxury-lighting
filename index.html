@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVault | Premium Electronics Store</title>
+    <title>Enzo Annie Luxury Lighting & Electronics</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,8 +15,8 @@
         }
 
         body {
-            background-color: #f4f6f9;
-            color: #333;
+            background-color: #fcfcfc;
+            color: #222;
         }
 
         /* Navbar */
@@ -26,30 +26,32 @@
             align-items: center;
             background: #ffffff;
             padding: 15px 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .nav-brand h1 {
-            color: #1e293b;
-            font-size: 22px;
+            color: #111;
+            font-size: 20px;
             font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .nav-brand h1 span {
-            color: #0284c7;
+            color: #c5a059; /* Luxury gold tone */
         }
 
         .nav-search {
             display: flex;
             align-items: center;
-            background: #f1f5f9;
+            background: #f4f4f4;
             padding: 10px 18px;
             border-radius: 30px;
             width: 400px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e5e5e5;
         }
 
         .nav-search input {
@@ -95,12 +97,15 @@
             border-radius: 12px;
             height: fit-content;
             box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
         }
 
         .sidebar h3 {
             margin-bottom: 15px;
-            font-size: 16px;
-            color: #1e293b;
+            font-size: 15px;
+            color: #111;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .sidebar ul {
@@ -113,7 +118,7 @@
             cursor: pointer;
             margin-bottom: 6px;
             font-size: 14px;
-            color: #475569;
+            color: #555;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -122,17 +127,17 @@
 
         .sidebar li i {
             width: 18px;
-            color: #64748b;
+            color: #888;
         }
 
         .sidebar li:hover, .sidebar li.active {
-            background: #e0f2fe;
-            color: #0369a1;
+            background: #fdfaf3;
+            color: #c5a059;
             font-weight: 600;
         }
 
         .sidebar li:hover i, .sidebar li.active i {
-            color: #0284c7;
+            color: #c5a059;
         }
 
         .feed {
@@ -142,7 +147,7 @@
         .feed h2 {
             margin-bottom: 20px;
             font-size: 20px;
-            color: #1e293b;
+            color: #111;
         }
 
         /* Product Grid */
@@ -160,7 +165,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
-            border: 1px solid #f1f5f9;
+            border: 1px solid #eee;
         }
 
         .product-card:hover {
@@ -172,7 +177,7 @@
             width: 100%;
             height: 190px;
             object-fit: cover;
-            background: #f8fafc;
+            background: #f9f9f9;
         }
 
         .product-info {
@@ -185,27 +190,27 @@
         .product-price {
             font-weight: 700;
             font-size: 18px;
-            color: #0ea5e9;
+            color: #c5a059;
             margin-bottom: 6px;
         }
 
         .product-title {
             font-size: 15px;
             font-weight: 600;
-            color: #1e293b;
+            color: #111;
             margin-bottom: 6px;
         }
 
         .product-desc {
             font-size: 13px;
-            color: #64748b;
+            color: #666;
             margin-bottom: 16px;
             flex: 1;
             line-height: 1.4;
         }
 
         .order-btn {
-            background: #0f172a;
+            background: #111;
             color: white;
             border: none;
             padding: 10px;
@@ -223,30 +228,30 @@
         }
 
         .order-btn:hover {
-            background: #1e293b;
+            background: #333;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 25px;
-            color: #94a3b8;
+            color: #888;
             font-size: 13px;
             margin-top: 50px;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #eaeaea;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header / Brand Name -->
+    <!-- Header / Brand Logo -->
     <header class="navbar">
         <div class="nav-brand">
-            <h1><i class="fa-solid fa-bolt"></i> Tech<span>Vault</span></h1>
+            <h1><i class="fa-solid fa-gem"></i> Enzo Annie <span>Luxury Lighting</span></h1>
         </div>
         <div class="nav-search">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Search phones, laptops, gadgets...">
+            <input type="text" id="searchInput" placeholder="Search chandeliers, wall lights, switches...">
         </div>
         <div class="nav-contact">
             <!-- CHANGE THE NUMBER 2348000000000 TO YOUR WHATSAPP NUMBER -->
@@ -262,17 +267,17 @@
         <aside class="sidebar">
             <h3>Categories</h3>
             <ul>
-                <li class="category-item active" data-category="all"><i class="fa-solid fa-border-all"></i> All Electronics</li>
-                <li class="category-item" data-category="smartphones"><i class="fa-solid fa-mobile-screen"></i> Smartphones</li>
-                <li class="category-item" data-category="laptops"><i class="fa-solid fa-laptop"></i> Laptops & PCs</li>
-                <li class="category-item" data-category="audio"><i class="fa-solid fa-headphones"></i> Audio & Earbuds</li>
-                <li class="category-item" data-category="accessories"><i class="fa-solid fa-plug"></i> Accessories</li>
+                <li class="category-item active" data-category="all"><i class="fa-solid fa-border-all"></i> All Collections</li>
+                <li class="category-item" data-category="chandeliers"><i class="fa-solid fa-lightbulb"></i> Luxury Chandeliers</li>
+                <li class="category-item" data-category="outdoor"><i class="fa-solid fa-sun"></i> Outdoor & Facade Lights</li>
+                <li class="category-item" data-category="wiring"><i class="fa-solid fa-plug"></i> Smart Switches & Sockets</li>
+                <li class="category-item" data-category="electronics"><i class="fa-solid fa-house"></i> Home Electronics</li>
             </ul>
         </aside>
 
         <!-- Product Grid -->
         <main class="feed">
-            <h2>Hot Deals & New Arrivals</h2>
+            <h2>Architectural & Home Lighting Collection</h2>
             <div class="product-grid" id="productGrid">
                 <!-- Products load dynamically from JavaScript -->
             </div>
@@ -281,53 +286,53 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 TechVault. Powered by GitHub Pages.</p>
+        <p>&copy; 2026 Enzo Annie Luxury Lighting. All rights reserved.</p>
     </footer>
 
     <script>
-        // --- ADD OR UPDATE YOUR ELECTRONICS STOCK HERE ---
+        // --- ADD OR UPDATE YOUR LIGHTS & ELECTRONICS STOCK HERE ---
         let products = [
             { 
-                title: "Infinix Hot 40i (8GB/256GB)", 
-                price: "₦145,000", 
-                category: "smartphones", 
-                image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500", 
-                desc: "Smooth performance, 90Hz punch-hole display, and massive storage capacity." 
+                title: "Modern Gold Crystal Chandelier", 
+                price: "₦120,000", 
+                category: "chandeliers", 
+                image: "https://images.unsplash.com/photo-1543196414-68f0f0896947?w=500", 
+                desc: "Exquisite multi-tier LED crystal ceiling light designed for luxury building entryways and living rooms." 
             },
             { 
-                title: "Wireless Noise-Canceling Earbuds", 
-                price: "₦28,000", 
-                category: "audio", 
-                image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500", 
-                desc: "Deep bass, crystal-clear microphone, and 30-hour total battery life with charging case." 
+                title: "Architectural Exterior Wall Sconce", 
+                price: "₦25,000", 
+                category: "outdoor", 
+                image: "https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=500", 
+                desc: "Weatherproof up-and-down outdoor LED facade light for modern building exteriors." 
             },
             { 
-                title: "HP Pavilion 15 Core i5 Laptop", 
-                price: "₦420,000", 
-                category: "laptops", 
-                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500", 
-                desc: "Fast processing speed, 16GB RAM, 512GB SSD, ideal for work and multitasking." 
-            },
-            { 
-                title: "Fast Charging Power Bank 20,000mAh", 
+                title: "Recessed Ceiling Downlights (Set of 6)", 
                 price: "₦22,000", 
-                category: "accessories", 
-                image: "https://images.unsplash.com/photo-1609592424104-93ad120cfd2b?w=500", 
-                desc: "Dual USB outputs with 22.5W fast charge technology for all mobile devices." 
+                category: "chandeliers", 
+                image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500", 
+                desc: "High-brightness anti-glare recessed architectural spotlights for homes and offices." 
             },
             { 
-                title: "Samsung Galaxy S23 Ultra", 
-                price: "₦780,000", 
-                category: "smartphones", 
-                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500", 
-                desc: "Flagship camera quality, stunning AMOLED display, and S-Pen included." 
+                title: "Tempered Glass Smart Touch Switch", 
+                price: "₦15,000", 
+                category: "wiring", 
+                image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500", 
+                desc: "Luxury crystal glass panel light switch with wireless remote and smartphone integration." 
             },
             { 
-                title: "Bluetooth RGB Gaming Speaker", 
-                price: "₦18,500", 
-                category: "audio", 
-                image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500", 
-                desc: "Dynamic LED light effects with punchy stereo sound and deep bass resonance." 
+                title: "Ambient RGB LED Strip Lighting Roll", 
+                price: "₦9,500", 
+                category: "chandeliers", 
+                image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=500", 
+                desc: "Flexible high-lumen lighting strip for POP ceilings, TV consoles, and concealed cove lighting." 
+            },
+            { 
+                title: "Inverter-Compatible Smart Home Fan", 
+                price: "₦48,000", 
+                category: "electronics", 
+                image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500", 
+                desc: "Energy-efficient standing appliance featuring built-in emergency backup battery and LED lamp." 
             }
         ];
 
@@ -340,13 +345,13 @@
         function displayProducts(items) {
             productGrid.innerHTML = "";
             if (items.length === 0) {
-                productGrid.innerHTML = "<p>No electronics found matching your search.</p>";
+                productGrid.innerHTML = "<p>No luxury fixtures found matching your search.</p>";
                 return;
             }
             
             items.forEach(product => {
-                // CHANGE THE NUMBER 2348000000000 BELOW TO YOUR WHATSAPP NUMBER TOO
-                const whatsappMessage = encodeURIComponent(`Hello, I would like to buy or inquire about this product: *${product.title}* priced at *${product.price}*. Is it currently available?`);
+                // CHANGE THE NUMBER 2348000000000 BELOW TO YOUR WHATSAPP NUMBER
+                const whatsappMessage = encodeURIComponent(`Hello Enzo Annie Luxury Lighting, I would like to inquire about your product: *${product.title}* priced at *${product.price}*. Is it available?`);
                 const whatsappLink = `https://wa.me/2348000000000?text=${whatsappMessage}`;
 
                 const card = document.createElement("div");
@@ -378,7 +383,7 @@
 
         searchInput.addEventListener("input", filterProducts);
 
-            categoryItems.forEach(item => {
+        categoryItems.forEach(item => {
             item.addEventListener("click", () => {
                 categoryItems.forEach(i => i.classList.remove("active"));
                 item.classList.add("active");
