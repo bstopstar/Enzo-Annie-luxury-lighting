@@ -3,230 +3,548 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | Enzo Annie</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Enzo Annie | Luxury Lighting & Electronics</title>
+
+  <meta
+    name="description"
+    content="Discover premium lighting, electronics, and accessories at Enzo Annie Luxury Lighting & Electronics."
+  >
+
+  <meta name="theme-color" content="#101010">
 
   <style>
+    :root {
+      --black: #101010;
+      --dark: #191919;
+      --gold: #d6b36a;
+      --cream: #f8f6f0;
+      --white: #ffffff;
+      --muted: #777777;
+      --border: #e8e4dc;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
     }
 
-    :root {
-      --gold: #c5a059;
-      --ink: #171717;
-      --line: #e8e8e8;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: #f7f7f7;
-      color: #222;
-      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .announcement {
+      background: var(--gold);
+      color: var(--black);
+      text-align: center;
+      padding: 9px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
 
     header {
-      background: white;
-      padding: 18px 24px;
-      border-bottom: 1px solid var(--line);
+      background: var(--black);
+      color: var(--white);
+      padding: 18px 5%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      gap: 20px;
       flex-wrap: wrap;
     }
 
-    header h1 {
-      font-size: 20px;
+    .brand {
+      display: flex;
+      flex-direction: column;
     }
 
-    header h1 span {
+    .brand-name {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--gold);
+      font-size: 23px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .brand-subtitle {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #dddddd;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: #eeeeee;
+    }
+
+    nav a:hover {
       color: var(--gold);
     }
 
-    main {
-      max-width: 1050px;
-      margin: 28px auto;
-      padding: 0 18px;
-    }
-
-    .panel {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px #00000005;
-    }
-
-    h2 {
-      font-size: 19px;
-      margin-bottom: 16px;
-    }
-
-    .muted {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      border: 1px solid #d8d8d8;
-      border-radius: 8px;
-      padding: 11px;
-      font-size: 14px;
-      background: white;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    button, .button {
-      border: 0;
-      border-radius: 8px;
-      padding: 11px 15px;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .primary {
-      background: #111;
-      color: white;
-    }
-
-    .secondary {
-      background: #eee;
-      color: #222;
-    }
-
-    .danger {
-      background: #fff0f0;
-      color: #a50000;
-    }
-
-    .row {
+    .hero {
+      min-height: 440px;
+      padding: 70px 7%;
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
       align-items: center;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.94),
+          rgba(0, 0, 0, 0.72),
+          rgba(0, 0, 0, 0.22)
+        ),
+        url("https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+      color: var(--white);
     }
 
-    .hidden {
-      display: none !important;
+    .hero-content {
+      max-width: 650px;
     }
 
-    .notice {
-      padding: 12px;
-      border-radius: 8px;
-      margin: 12px 0;
-      font-size: 14px;
-      line-height: 1.45;
-      background: #f5f5f5;
+    .eyebrow {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
     }
 
-    .notice.error {
-      background: #fff0f0;
-      color: #8d0000;
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.12;
+      margin-bottom: 22px;
+      font-weight: normal;
     }
 
-    .notice.success {
-      background: #effaf0;
-      color: #145b20;
-    }
-
-    .product-row {
-      display: grid;
-      grid-template-columns: 72px 1fr auto;
-      gap: 14px;
-      align-items: center;
-      border-top: 1px solid var(--line);
-      padding: 13px 0;
-    }
-
-    .product-row img {
-      width: 72px;
-      height: 64px;
-      object-fit: cover;
-      background: #eee;
-      border-radius: 7px;
-    }
-
-    .product-row h3 {
+    .hero p {
+      max-width: 490px;
+      color: #e1e1e1;
       font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      border: none;
+      padding: 13px 23px;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: bold;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      background: #edcf8a;
+      transform: translateY(-2px);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--white);
+      padding: 26px 5%;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature {
+      text-align: center;
+      padding: 8px;
+    }
+
+    .feature-icon {
+      font-size: 23px;
       margin-bottom: 5px;
     }
 
-    .product-row p {
+    .feature h3 {
       font-size: 13px;
-      color: #666;
+      margin-bottom: 3px;
     }
 
-    .badge {
+    .feature p {
+      color: var(--muted);
       font-size: 11px;
-      padding: 4px 7px;
-      background: #f5f0e5;
-      border-radius: 20px;
-      display: inline-block;
-      margin-top: 5px;
     }
 
-    .hint {
+    .section {
+      padding: 65px 5%;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    .section-heading h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: normal;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 48px;
+    }
+
+    .category-card {
+      background: var(--black);
+      color: var(--white);
+      border: 1px solid #333333;
+      min-height: 110px;
+      padding: 20px 12px;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .category-card:hover,
+    .category-card.active {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+
+    .category-card span {
+      display: block;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .category-card strong {
       font-size: 12px;
-      color: #666;
+    }
+
+    .shop-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .shop-toolbar h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25px;
+      font-weight: normal;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 320px;
+      padding: 12px 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: var(--gold);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: 0.25s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      background: #eeeeee;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.04);
+    }
+
+    .product-category {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      padding: 5px 8px;
+      background: var(--white);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .product-info {
+      padding: 17px;
+    }
+
+    .product-name {
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .product-description {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .product-price {
+      color: #8b6b2e;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .product-button {
+      border: 1px solid var(--black);
+      background: var(--black);
+      color: var(--white);
+      padding: 8px 10px;
+      font-size: 11px;
+    }
+
+    .product-button:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+
+    .status-message {
+      grid-column: 1 / -1;
+      background: var(--white);
+      padding: 35px 20px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .status-message strong {
+      display: block;
+      color: var(--black);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .status-message button {
+      margin-top: 15px;
+    }
+
+    .about {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 65px 7%;
+    }
+
+    .about h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: normal;
+      margin-bottom: 18px;
+    }
+
+    .about p {
+      color: #cccccc;
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 14px;
+    }
+
+    .contact {
+      text-align: center;
+      padding: 55px 5%;
+      background: #eee9df;
+    }
+
+    .contact h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    .contact p {
+      color: #666666;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    footer {
+      background: var(--black);
+      color: #cccccc;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 11px;
+    }
+
+    footer .footer-brand {
+      color: var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 19px;
+      margin-bottom: 7px;
+    }
+
+    footer p {
       margin-top: 5px;
     }
 
-    @media(max-width: 650px) {
+    @media (max-width: 950px) {
+      .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
       header {
-        align-items: flex-start;
-        flex-direction: column;
+        padding: 16px 5%;
       }
 
-      .form-grid {
-        grid-template-columns: 1fr;
+      .brand-name {
+        font-size: 20px;
       }
 
-      .full {
-        grid-column: auto;
+      nav {
+        gap: 14px;
       }
 
-      .product-row {
-        grid-template-columns: 55px 1fr;
+      nav a {
+        font-size: 12px;
       }
 
-      .product-row img {
-        width: 55px;
-        height: 55px;
+      .hero {
+        min-height: 390px;
+        padding: 55px 6%;
       }
 
-      .product-row .row {
-        grid-column: 1 / -1;
+      .features {
+        padding: 20px 2%;
+      }
+
+      .feature h3 {
+        font-size: 11px;
+      }
+
+      .feature p {
+        font-size: 10px;
+      }
+
+      .section {
+        padding: 45px 4%;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .product-info {
+        padding: 12px;
+      }
+
+      .product-name {
+        font-size: 13px;
+      }
+
+      .product-description {
+        font-size: 11px;
+      }
+
+      .product-price {
+        font-size: 14px;
+      }
+
+      .product-button {
+        padding: 8px;
+        font-size: 10px;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+
+      .shop-toolbar {
+        align-items: stretch;
+      }
+
+      .category-card {
+        min-height: 95px;
       }
     }
   </style>
@@ -234,721 +552,422 @@
 
 <body>
 
-<header>
-  <h1>
-    <i class="fa-solid fa-gem"></i>
-    Enzo Annie <span>Admin Dashboard</span>
-  </h1>
+  <div class="announcement">
+    WELCOME TO ENZO ANNIE — YOUR HOME FOR STYLE & TECHNOLOGY
+  </div>
 
-  <div class="row">
-    <a class="button secondary" href="index.html">
-      <i class="fa-solid fa-store"></i> View Store
+  <header>
+    <a href="#home" class="brand">
+      <span class="brand-name">ENZO ANNIE</span>
+      <span class="brand-subtitle">Luxury Lighting & Electronics</span>
     </a>
 
-    <button id="logoutBtn" class="secondary hidden">
-      <i class="fa-solid fa-right-from-bracket"></i> Log Out
-    </button>
-  </div>
-</header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<main>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow">Elegance Meets Innovation</div>
 
-  <section id="configWarning" class="panel hidden">
-    <h2>Connect Your Database First</h2>
-    <p class="muted">
-      Open config.js and enter your Supabase Project URL and public
-      anon/publishable key. Follow SETUP.md to configure your database
-      and administrator account.
-    </p>
-  </section>
+        <h1>Upgrade Your Space.<br>Elevate Your Lifestyle.</h1>
 
-  <section id="loginPanel" class="panel">
-    <h2>Administrator Login</h2>
+        <p>
+          Discover stylish lighting, quality electronics, and carefully
+          selected accessories designed to bring comfort, beauty, and
+          modern technology into your everyday life.
+        </p>
 
-    <p class="muted">
-      This dashboard is for the authorized store administrator.
-      Customers must not be given administrator access.
-    </p>
+        <a href="#shop" class="button">EXPLORE OUR COLLECTION</a>
+      </div>
+    </section>
 
-    <div id="loginNotice" class="notice hidden"></div>
-
-    <form id="loginForm">
-      <div class="form-grid">
-
-        <div>
-          <label for="email">Admin Email</label>
-          <input
-            id="email"
-            type="email"
-            autocomplete="username"
-            required
-          >
-        </div>
-
-        <div>
-          <label for="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            autocomplete="current-password"
-            minlength="8"
-            required
-          >
-        </div>
-
+    <section class="features" aria-label="Store highlights">
+      <div class="feature">
+        <div class="feature-icon">✦</div>
+        <h3>Quality Selection</h3>
+        <p>Products chosen with care</p>
       </div>
 
-      <div class="row" style="margin-top:15px">
-        <button class="primary" type="submit">
-          <i class="fa-solid fa-lock"></i> Sign In
+      <div class="feature">
+        <div class="feature-icon">◇</div>
+        <h3>Modern Design</h3>
+        <p>Style meets functionality</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">♡</div>
+        <h3>Customer Focus</h3>
+        <p>Your satisfaction matters</p>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+
+      <div class="section-heading">
+        <div class="eyebrow">Discover Something Special</div>
+        <h2>Explore Our Collection</h2>
+        <p>Find products that fit your lifestyle.</p>
+      </div>
+
+      <div class="categories" id="categories">
+
+        <button class="category-card active" data-category="All">
+          <span>✦</span>
+          <strong>All Products</strong>
         </button>
-      </div>
-    </form>
-  </section>
 
-  <section id="dashboard" class="hidden">
+        <button class="category-card" data-category="Lighting">
+          <span>💡</span>
+          <strong>Lighting</strong>
+        </button>
 
-    <section class="panel">
+        <button class="category-card" data-category="Electronics">
+          <span>⚡</span>
+          <strong>Electronics</strong>
+        </button>
 
-      <h2 id="formHeading">Add a Product</h2>
+        <button class="category-card" data-category="Accessories">
+          <span>◇</span>
+          <strong>Accessories</strong>
+        </button>
 
-      <p class="muted">
-        Add a product name, price, description and image.
-        Prices are entered in Nigerian naira.
-      </p>
-
-      <div id="formNotice" class="notice hidden"></div>
-
-      <form id="productForm">
-
-        <input id="productId" type="hidden">
-
-        <div class="form-grid">
-
-          <div>
-            <label for="title">Product Name *</label>
-            <input
-              id="title"
-              maxlength="120"
-              required
-              placeholder="Modern Gold Crystal Chandelier"
-            >
-          </div>
-
-          <div>
-            <label for="price">Price (₦) *</label>
-            <input
-              id="price"
-              type="number"
-              min="0"
-              step="1"
-              required
-              placeholder="85000"
-            >
-          </div>
-
-          <div>
-            <label for="category">Category *</label>
-
-            <select id="category" required>
-              <option value="chandeliers">
-                Chandeliers & Ceiling Lights
-              </option>
-
-              <option value="bulbs">
-                Bulbs & LED
-              </option>
-
-              <option value="outdoor">
-                Outdoor & Facade Lights
-              </option>
-
-              <option value="wiring">
-                Switches & Sockets
-              </option>
-
-              <option value="electronics">
-                Home Electronics
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label for="imageFile">Product Image</label>
-
-            <input
-              id="imageFile"
-              type="file"
-              accept="image/png,image/jpeg,image/webp,image/gif"
-            >
-
-            <p class="hint">
-              JPG, PNG, WEBP or GIF. Maximum 5 MB.
-            </p>
-          </div>
-
-          <div class="full">
-            <label for="description">Product Description *</label>
-
-            <textarea
-              id="description"
-              maxlength="1200"
-              required
-              placeholder="Describe the product, features, size and colour."
-            ></textarea>
-          </div>
-
-          <div class="full">
-            <label>
-              <input
-                id="isPublished"
-                type="checkbox"
-                checked
-                style="width:auto;margin-right:8px"
-              >
-              Publish this product on the customer website
-            </label>
-          </div>
-
-        </div>
-
-        <div class="row" style="margin-top:15px">
-
-          <button class="primary" type="submit" id="saveBtn">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            Save Product
-          </button>
-
-          <button
-            class="secondary hidden"
-            type="button"
-            id="cancelEditBtn"
-          >
-            Cancel Edit
-          </button>
-
-        </div>
-
-      </form>
-    </section>
-
-    <section class="panel">
-
-      <h2>Your Products</h2>
-
-      <p class="muted">
-        Edit products, publish or hide listings, and delete products.
-      </p>
-
-      <div id="listNotice" class="notice hidden"></div>
-
-      <div id="productList">
-        <p class="muted">Loading products...</p>
       </div>
 
-    </section>
+      <div class="shop-toolbar">
+        <h3 id="shop-title">Our Products</h3>
 
-  </section>
-
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
-
-<script>
-  const $ = id => document.getElementById(id);
-
-  const config = window.STORE_CONFIG || {};
-
-  const configured =
-    config.SUPABASE_URL &&
-    config.SUPABASE_ANON_KEY &&
-    !config.SUPABASE_URL.includes("YOUR_PROJECT");
-
-  let db = null;
-  let products = [];
-  let editingImageUrl = "";
-
-  function notice(id, message, type = "") {
-    const el = $(id);
-
-    el.textContent = message;
-
-    el.className =
-      "notice" + (type ? " " + type : "");
-
-    el.classList.remove("hidden");
-  }
-
-  function clearNotice(id) {
-    $(id).classList.add("hidden");
-  }
-
-  function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, ch => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    }[ch]));
-  }
-
-  function money(value) {
-    return new Intl.NumberFormat("en-NG", {
-      style: "currency",
-      currency: "NGN",
-      maximumFractionDigits: 0
-    }).format(Number(value) || 0);
-  }
-
-  if (!configured || !window.supabase) {
-
-    $("configWarning").classList.remove("hidden");
-    $("loginPanel").classList.add("hidden");
-
-  } else {
-
-    db = window.supabase.createClient(
-      config.SUPABASE_URL,
-      config.SUPABASE_ANON_KEY
-    );
-
-    checkSession();
-  }
-
-  async function checkSession() {
-    const { data, error } = await db.auth.getSession();
-
-    if (error) {
-      console.error(error.message);
-    }
-
-    if (data.session) {
-      await showDashboard();
-    } else {
-      showLogin();
-    }
-  }
-
-  function showLogin() {
-    $("loginPanel").classList.remove("hidden");
-    $("dashboard").classList.add("hidden");
-    $("logoutBtn").classList.add("hidden");
-  }
-
-  async function showDashboard() {
-    $("loginPanel").classList.add("hidden");
-    $("dashboard").classList.remove("hidden");
-    $("logoutBtn").classList.remove("hidden");
-
-    await loadAdminProducts();
-  }
-
-  $("loginForm").addEventListener("submit", async event => {
-
-    event.preventDefault();
-
-    clearNotice("loginNotice");
-
-    const { error } = await db.auth.signInWithPassword({
-      email: $("email").value.trim(),
-      password: $("password").value
-    });
-
-    if (error) {
-      notice(
-        "loginNotice",
-        "Sign-in failed. Check your email and password and confirm that your account has administrator permission.",
-        "error"
-      );
-
-      return;
-    }
-
-    await showDashboard();
-
-  });
-
-  $("logoutBtn").addEventListener("click", async () => {
-    await db.auth.signOut();
-    showLogin();
-  });
-
-  $("cancelEditBtn").addEventListener("click", resetForm);
-
-  async function loadAdminProducts() {
-
-    $("productList").innerHTML =
-      '<p class="muted">Loading products...</p>';
-
-    const { data, error } = await db
-      .from("products")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (error) {
-
-      $("productList").innerHTML = "";
-
-      notice(
-        "listNotice",
-        "Could not load products. Check your database setup and administrator permissions.",
-        "error"
-      );
-
-      return;
-    }
-
-    products = data || [];
-
-    renderAdminProducts();
-  }
-
-  function renderAdminProducts() {
-
-    const root = $("productList");
-
-    if (!products.length) {
-
-      root.innerHTML =
-        '<p class="muted" style="padding-top:14px">No products yet. Use the form above to add your first product.</p>';
-
-      return;
-    }
-
-    root.innerHTML = products.map(product => `
-      <article class="product-row">
-
-        <img
-          src="${escapeHTML(product.image_url || "")}"
-          alt=""
-          onerror="this.style.visibility='hidden'"
+        <input
+          type="search"
+          id="search-input"
+          class="search-box"
+          placeholder="Search products..."
+          aria-label="Search products"
         >
+      </div>
 
-        <div>
-          <h3>${escapeHTML(product.title)}</h3>
-
-          <p>
-            ${money(product.price)} ·
-            ${escapeHTML(product.category)}
-          </p>
-
-          <span class="badge">
-            ${product.is_published ? "Published" : "Draft / hidden"}
-          </span>
+      <div class="product-grid" id="product-grid">
+        <div class="status-message">
+          <strong>Loading our collection...</strong>
+          Please wait while we fetch our products.
         </div>
+      </div>
 
-        <div class="row">
+    </section>
 
-          <button
-            class="secondary"
-            type="button"
-            data-edit="${escapeHTML(product.id)}"
-          >
-            <i class="fa-solid fa-pen"></i> Edit
-          </button>
+    <section class="about" id="about">
+      <div class="eyebrow">The Enzo Annie Difference</div>
 
-          <button
-            class="secondary"
-            type="button"
-            data-toggle="${escapeHTML(product.id)}"
-          >
-            ${product.is_published ? "Unpublish" : "Publish"}
-          </button>
+      <h2>Where Quality Meets Elegance</h2>
 
-          <button
-            class="danger"
-            type="button"
-            data-delete="${escapeHTML(product.id)}"
-          >
-            <i class="fa-solid fa-trash"></i> Delete
-          </button>
+      <p>
+        At Enzo Annie Luxury Lighting & Electronics, our goal is to help
+        you discover products that combine design, convenience, and
+        functionality. Explore our collection and find something
+        special for your home or everyday life.
+      </p>
+    </section>
 
-        </div>
+    <section class="contact" id="contact">
+      <h2>Need Help Finding Something?</h2>
 
-      </article>
-    `).join("");
+      <p>
+        Explore our products and get in touch with us for enquiries
+        about an item you're interested in.
+      </p>
 
-    root.querySelectorAll("[data-edit]").forEach(button => {
-      button.addEventListener("click", () => {
-        editProduct(button.dataset.edit);
-      });
-    });
+      <a href="#shop" class="button">BROWSE PRODUCTS</a>
+    </section>
 
-    root.querySelectorAll("[data-toggle]").forEach(button => {
-      button.addEventListener("click", () => {
-        togglePublish(button.dataset.toggle);
-      });
-    });
+  </main>
 
-    root.querySelectorAll("[data-delete]").forEach(button => {
-      button.addEventListener("click", () => {
-        deleteProduct(button.dataset.delete);
-      });
-    });
-  }
+  <footer>
+    <div class="footer-brand">ENZO ANNIE</div>
 
-  function editProduct(id) {
+    <p>Luxury Lighting & Electronics</p>
 
-    const product = products.find(
-      item => String(item.id) === String(id)
-    );
+    <p>
+      &copy; <span id="current-year"></span>
+      Enzo Annie. All rights reserved.
+    </p>
+  </footer>
 
-    if (!product) return;
+  <!-- Supabase JavaScript library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    $("productId").value = product.id;
-    $("title").value = product.title;
-    $("price").value = product.price;
-    $("category").value = product.category;
-    $("description").value = product.description;
+  <!-- Your Supabase project configuration -->
+  <script src="config.js"></script>
 
-    $("isPublished").checked = !!product.is_published;
+  <script>
+    (() => {
+      "use strict";
 
-    editingImageUrl = product.image_url || "";
+      const grid = document.getElementById("product-grid");
+      const searchInput = document.getElementById("search-input");
+      const shopTitle = document.getElementById("shop-title");
 
-    $("formHeading").textContent = "Edit Product";
+      let allProducts = [];
+      let selectedCategory = "All";
 
-    $("saveBtn").innerHTML =
-      '<i class="fa-solid fa-floppy-disk"></i> Update Product';
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
 
-    $("cancelEditBtn").classList.remove("hidden");
+      function showMessage(title, message, buttonText, buttonAction) {
+        grid.replaceChildren();
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }
+        const box = document.createElement("div");
+        box.className = "status-message";
 
-  function resetForm() {
+        const heading = document.createElement("strong");
+        heading.textContent = title;
 
-    $("productForm").reset();
+        const paragraph = document.createElement("p");
+        paragraph.textContent = message;
 
-    $("productId").value = "";
+        box.append(heading, paragraph);
 
-    editingImageUrl = "";
+        if (buttonText && buttonAction) {
+          const button = document.createElement("button");
+          button.className = "button";
+          button.textContent = buttonText;
+          button.addEventListener("click", buttonAction);
+          box.appendChild(button);
+        }
 
-    $("formHeading").textContent = "Add a Product";
-
-    $("saveBtn").innerHTML =
-      '<i class="fa-solid fa-cloud-arrow-up"></i> Save Product';
-
-    $("cancelEditBtn").classList.add("hidden");
-
-    clearNotice("formNotice");
-  }
-
-  async function uploadImage(file) {
-
-    if (!file) return editingImageUrl;
-
-    const allowed = [
-      "image/jpeg",
-      "image/png",
-      "image/webp",
-      "image/gif"
-    ];
-
-    if (!allowed.includes(file.type)) {
-      throw new Error(
-        "Please choose a JPG, PNG, WEBP or GIF image."
-      );
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      throw new Error(
-        "Image must be 5 MB or smaller."
-      );
-    }
-
-    const extension = file.name
-      .split(".")
-      .pop()
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, "") || "jpg";
-
-    const path = `${crypto.randomUUID()}.${extension}`;
-
-    const { error } = await db
-      .storage
-      .from("product-images")
-      .upload(path, file, {
-        upsert: false,
-        contentType: file.type
-      });
-
-    if (error) {
-      throw new Error(
-        "Image upload failed: " + error.message
-      );
-    }
-
-    const { data } = db
-      .storage
-      .from("product-images")
-      .getPublicUrl(path);
-
-    return data.publicUrl;
-  }
-
-  $("productForm").addEventListener("submit", async event => {
-
-    event.preventDefault();
-
-    clearNotice("formNotice");
-
-    $("saveBtn").disabled = true;
-    $("saveBtn").textContent = "Saving...";
-
-    try {
-
-      const imageUrl = await uploadImage(
-        $("imageFile").files[0]
-      );
-
-      const payload = {
-        title: $("title").value.trim(),
-        price: Number($("price").value),
-        category: $("category").value,
-        description: $("description").value.trim(),
-        image_url: imageUrl,
-        is_published: $("isPublished").checked
-      };
-
-      if (
-        !payload.title ||
-        !payload.description ||
-        !Number.isFinite(payload.price) ||
-        payload.price < 0
-      ) {
-        throw new Error(
-          "Enter a product name, valid price and description."
-        );
+        grid.appendChild(box);
       }
 
-      let result;
+      function formatPrice(price) {
+        const amount = Number(price);
 
-      if ($("productId").value) {
+        if (!Number.isFinite(amount)) {
+          return "Price on request";
+        }
 
-        result = await db
-          .from("products")
-          .update(payload)
-          .eq("id", $("productId").value)
-          .select()
-          .single();
-
-      } else {
-
-        result = await db
-          .from("products")
-          .insert(payload)
-          .select()
-          .single();
-
+        return new Intl.NumberFormat("en-NG", {
+          style: "currency",
+          currency: "NGN",
+          maximumFractionDigits: 2
+        }).format(amount);
       }
 
-      if (result.error) {
-        throw new Error(result.error.message);
+      function makeProductCard(product) {
+        const card = document.createElement("article");
+        card.className = "product-card";
+
+        const imageWrap = document.createElement("div");
+        imageWrap.className = "product-image-wrap";
+
+        const image = document.createElement("img");
+        image.className = "product-image";
+        image.alt = product.name || "Store product";
+        image.loading = "lazy";
+        image.src = product.image_url || "";
+
+        image.addEventListener("error", () => {
+          image.removeAttribute("src");
+          image.alt = "Product image unavailable";
+          image.style.display = "none";
+
+          imageWrap.style.display = "grid";
+          imageWrap.style.placeItems = "center";
+
+          const placeholder = document.createElement("span");
+          placeholder.textContent = "Image unavailable";
+          placeholder.style.color = "#777";
+          placeholder.style.fontSize = "12px";
+
+          imageWrap.appendChild(placeholder);
+        }, { once: true });
+
+        imageWrap.appendChild(image);
+
+        const badge = document.createElement("span");
+        badge.className = "product-category";
+        badge.textContent = product.category || "Product";
+        imageWrap.appendChild(badge);
+
+        const info = document.createElement("div");
+        info.className = "product-info";
+
+        const name = document.createElement("h3");
+        name.className = "product-name";
+        name.textContent = product.name || "Unnamed product";
+
+        const description = document.createElement("p");
+        description.className = "product-description";
+        description.textContent = product.description || "";
+
+        const bottom = document.createElement("div");
+        bottom.className = "product-bottom";
+
+        const price = document.createElement("span");
+        price.className = "product-price";
+        price.textContent = formatPrice(product.price);
+
+        const button = document.createElement("button");
+        button.className = "product-button";
+        button.textContent = "View Details";
+
+        button.addEventListener("click", () => {
+          const detail = [
+            product.name || "Product",
+            "Price: " + formatPrice(product.price),
+            "Category: " + (product.category || "General"),
+            product.description || ""
+          ].join("\n\n");
+
+          window.alert(detail);
+        });
+
+        bottom.append(price, button);
+        info.append(name, description, bottom);
+        card.append(imageWrap, info);
+
+        return card;
       }
 
-      notice(
-        "formNotice",
-        "Product saved successfully. Published products will appear on your customer website.",
-        "success"
-      );
+      function renderProducts() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
 
-      resetForm();
+        const filtered = allProducts.filter(product => {
+          const matchesCategory =
+            selectedCategory === "All" ||
+            String(product.category || "").toLowerCase() ===
+              selectedCategory.toLowerCase();
 
-      await loadAdminProducts();
+          const searchableText = [
+            product.name,
+            product.category,
+            product.description
+          ].join(" ").toLowerCase();
 
-    } catch (error) {
+          return matchesCategory && searchableText.includes(searchTerm);
+        });
 
-      notice(
-        "formNotice",
-        error.message || "Something went wrong while saving this product.",
-        "error"
-      );
+        shopTitle.textContent =
+          selectedCategory === "All"
+            ? "Our Products"
+            : selectedCategory;
 
-    } finally {
+        grid.replaceChildren();
 
-      $("saveBtn").disabled = false;
+        if (filtered.length === 0) {
+          showMessage(
+            allProducts.length === 0
+              ? "Our collection is coming soon"
+              : "No matching products found",
+            allProducts.length === 0
+              ? "Products will appear here once they have been added to our store."
+              : "Try another search or choose a different category.",
+            "View All Products",
+            () => {
+              selectedCategory = "All";
+              searchInput.value = "";
+              updateCategoryButtons();
+              renderProducts();
+            }
+          );
 
-      $("saveBtn").innerHTML =
-        '<i class="fa-solid fa-cloud-arrow-up"></i> Save Product';
+          return;
+        }
 
-    }
+        const fragment = document.createDocumentFragment();
 
-  });
+        filtered.forEach(product => {
+          fragment.appendChild(makeProductCard(product));
+        });
 
-  async function togglePublish(id) {
+        grid.appendChild(fragment);
+      }
 
-    const product = products.find(
-      item => String(item.id) === String(id)
-    );
+      function updateCategoryButtons() {
+        document.querySelectorAll(".category-card").forEach(button => {
+          button.classList.toggle(
+            "active",
+            button.dataset.category === selectedCategory
+          );
+        });
+      }
 
-    if (!product) return;
+      document.querySelectorAll(".category-card").forEach(button => {
+        button.addEventListener("click", () => {
+          selectedCategory = button.dataset.category;
+          updateCategoryButtons();
+          renderProducts();
 
-    const { error } = await db
-      .from("products")
-      .update({
-        is_published: !product.is_published
-      })
-      .eq("id", id);
+          document.getElementById("shop").scrollIntoView({
+            behavior: "smooth"
+          });
+        });
+      });
 
-    if (error) {
+      searchInput.addEventListener("input", renderProducts);
 
-      notice(
-        "listNotice",
-        "Could not change publication status: " + error.message,
-        "error"
-      );
+      async function loadProducts() {
+        if (
+          !window.supabase ||
+          typeof window.SUPABASE_URL !== "string" ||
+          typeof window.SUPABASE_ANON_KEY !== "string" ||
+          !window.SUPABASE_URL ||
+          !window.SUPABASE_ANON_KEY ||
+          window.SUPABASE_ANON_KEY.includes("PASTE_YOUR")
+        ) {
+          showMessage(
+            "Store configuration needed",
+            "Please check that config.js contains your Supabase project URL and publishable key."
+          );
+          return;
+        }
 
-      return;
-    }
+        try {
+          const client = window.supabase.createClient(
+            window.SUPABASE_URL,
+            window.SUPABASE_ANON_KEY
+          );
 
-    await loadAdminProducts();
-  }
+          const { data, error } = await client
+            .from("products")
+            .select("id, name, price, category, description, image_url")
+            .order("created_at", { ascending: false });
 
-  async function deleteProduct(id) {
+          if (error) {
+            console.error("Supabase product error:", error);
 
-    const product = products.find(
-      item => String(item.id) === String(id)
-    );
+            showMessage(
+              "We couldn't load the products",
+              "Please try again later. If the problem continues, the store database permissions may need checking.",
+              "Try Again",
+              loadProducts
+            );
 
-    if (!product) return;
+            return;
+          }
 
-    if (!confirm(
-      `Delete "${product.title}"? This cannot be undone.`
-    )) {
-      return;
-    }
+          allProducts = data || [];
+          renderProducts();
 
-    const { error } = await db
-      .from("products")
-      .delete()
-      .eq("id", id);
+        } catch (error) {
+          console.error("Store loading error:", error);
 
-    if (error) {
+          showMessage(
+            "Something went wrong",
+            "Please check your internet connection and try again.",
+            "Try Again",
+            loadProducts
+          );
+        }
+      }
 
-      notice(
-        "listNotice",
-        "Could not delete product: " + error.message,
-        "error"
-      );
-
-      return;
-    }
-
-    notice(
-      "listNotice",
-      "Product deleted.",
-      "success"
-    );
-
-    await loadAdminProducts();
-  }
-
-</script>
+      loadProducts();
+    })();
+  </script>
 
 </body>
 </html>
