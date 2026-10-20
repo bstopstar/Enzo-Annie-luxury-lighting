@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Dashboard | Enzo Annie Luxury</title>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
-
-  <style>
+  <title>Admin Dashboard | Enzo Annie Luxury</title>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script src="config.js"></script>  <style>
     * { box-sizing: border-box; }
 
     body {
@@ -75,6 +69,12 @@
       color: white;
     }
 
+    .delete-button {
+      background: #a52a2a;
+      color: #fff;
+      margin-top: 10px;
+    }
+
     .hidden { display: none !important; }
 
     #message {
@@ -111,82 +111,80 @@
       font-size: 13px;
       color: #bbb;
     }
-  </style>
-</head>
-
-<body>
+  </style></head><body>
   <main class="container">
     <h1>Enzo Annie Luxury</h1>
-    <p>Administrator Dashboard</p>
+    <p>Administrator Dashboard</p><div id="loginSection">
+  <h2>Admin Login</h2>
 
-    <div id="loginSection">
-      <h2>Admin Login</h2>
+  <form id="loginForm">
+    <label for="email">Administrator Email</label>
+    <input id="email" type="email" autocomplete="username" required>
 
-      <form id="loginForm">
-        <label for="email">Administrator Email</label>
-        <input id="email" type="email" autocomplete="username" required>
+    <label for="password">Password</label>
+    <input id="password" type="password"
+      autocomplete="current-password" required>
 
-        <label for="password">Password</label>
-        <input id="password" type="password"
-          autocomplete="current-password" required>
+    <button id="loginButton" type="submit">Sign In</button>
+  </form>
+</div>
 
-        <button id="loginButton" type="submit">Sign In</button>
-      </form>
-    </div>
+<div id="dashboard" class="hidden">
+  <p id="signedInAs"></p>
 
-    <div id="dashboard" class="hidden">
-      <p id="signedInAs"></p>
-      <button id="logoutButton" class="secondary" type="button">
-        Sign Out
-      </button>
+  <button id="logoutButton" class="secondary" type="button">
+    Sign Out
+  </button>
 
-      <hr style="margin-top:25px;border-color:#444">
+  <hr style="margin-top:25px;border-color:#444">
 
-      <h2>Add New Product</h2>
+  <h2>Add New Product</h2>
 
-      <form id="productForm">
-        <label for="name">Product Name</label>
-        <input id="name" maxlength="150"
-          placeholder="e.g. Luxury Crystal Chandelier" required>
+  <form id="productForm">
+    <label for="name">Product Name</label>
+    <input id="name" maxlength="150"
+      placeholder="e.g. Luxury Crystal Chandelier" required>
 
-        <label for="price">Price (₦)</label>
-        <input id="price" type="number" min="0" step="0.01"
-          placeholder="e.g. 85000" required>
+    <label for="price">Price (₦)</label>
+    <input id="price" type="number" min="0" step="0.01"
+      placeholder="e.g. 85000" required>
 
-        <label for="category">Category</label>
-        <select id="category" required>
-          <option value="">Choose a category</option>
-          <option value="Lighting">Lighting</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Accessories">Accessories</option>
-          <option value="Other">Other</option>
-        </select>
+    <label for="category">Category</label>
+    <select id="category" required>
+      <option value="">Choose a category</option>
+      <option value="Lighting">Lighting</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Accessories">Accessories</option>
+      <option value="Other">Other</option>
+    </select>
 
-        <label for="description">Product Description</label>
-        <textarea id="description" maxlength="5000"
-          placeholder="Describe your product..." required></textarea>
+    <label for="description">Product Description</label>
+    <textarea id="description" maxlength="5000"
+      placeholder="Describe your product..." required></textarea>
 
-        <label for="imageFile">Product Image</label>
-        <input id="imageFile" type="file"
-          accept="image/jpeg,image/png,image/webp" required>
+    <label for="imageFile">Product Image</label>
+    <input id="imageFile" type="file"
+      accept="image/jpeg,image/png,image/webp" required>
 
-        <p class="small">
-          Use a JPG, PNG or WebP image. Maximum size: 5 MB.
-        </p>
+    <p class="small">
+      Use a JPG, PNG or WebP image. Maximum size: 5 MB.
+    </p>
 
-        <img id="preview" alt="Selected product image preview">
+    <img id="preview" alt="Selected product image preview">
 
-        <button id="saveButton" type="submit">Upload and Add Product</button>
-      </form>
+    <button id="saveButton" type="submit">
+      Upload and Add Product
+    </button>
+  </form>
 
-      <h2 style="margin-top:35px">Your Products</h2>
-      <div id="productsList">Loading products...</div>
-    </div>
+  <h2 style="margin-top:35px">Your Products</h2>
 
-    <div id="message" role="status" aria-live="polite"></div>
-  </main>
+  <div id="productsList">Loading products...</div>
+</div>
 
-  <script>
+<div id="message" role="status" aria-live="polite"></div>
+
+  </main>  <script>
     (() => {
       const message = document.getElementById("message");
       const loginSection = document.getElementById("loginSection");
@@ -198,6 +196,8 @@
       const imageFile = document.getElementById("imageFile");
       const preview = document.getElementById("preview");
       const productsList = document.getElementById("productsList");
+
+      const ADMIN_ID = "e3e5a6cc-476a-425b-8c4d-10efccd6e26e";
 
       function showMessage(text, success = false) {
         message.textContent = text;
@@ -218,11 +218,35 @@
         window.STORE_CONFIG.SUPABASE_ANON_KEY
       );
 
+      async function requireAdmin() {
+        const { data, error } = await client.auth.getUser();
+
+        if (error || !data.user) {
+          throw new Error("Your session has expired. Please sign in again.");
+        }
+
+        if (data.user.id !== ADMIN_ID) {
+          throw new Error("This account is not authorized as administrator.");
+        }
+
+        return data.user;
+      }
+
       async function showDashboard(user) {
+        if (!user || user.id !== ADMIN_ID) {
+          await client.auth.signOut();
+          loginSection.classList.remove("hidden");
+          dashboard.classList.add("hidden");
+          showMessage("Access denied. This account is not the designated administrator.");
+          return;
+        }
+
         loginSection.classList.add("hidden");
         dashboard.classList.remove("hidden");
+
         document.getElementById("signedInAs").textContent =
           "Signed in as: " + user.email;
+
         showMessage("");
         await loadProducts();
       }
@@ -253,6 +277,11 @@
 
           if (error) throw error;
 
+          if (!data.user || data.user.id !== ADMIN_ID) {
+            await client.auth.signOut();
+            throw new Error("This account is not authorized as administrator.");
+          }
+
           await showDashboard(data.user);
         } catch (error) {
           showMessage("Sign-in failed: " + error.message);
@@ -273,6 +302,7 @@
           dashboard.classList.add("hidden");
           loginSection.classList.remove("hidden");
           productForm.reset();
+          preview.removeAttribute("src");
           preview.style.display = "none";
           productsList.textContent = "";
           showMessage("You have signed out.", true);
@@ -309,44 +339,159 @@
       async function loadProducts() {
         productsList.textContent = "Loading products...";
 
-        const { data, error } = await client
-          .from("products")
-          .select("id, name, price, category, image_url")
-          .order("created_at", { ascending: false });
+        try {
+          await requireAdmin();
 
-        if (error) {
+          const { data, error } = await client
+            .from("products")
+            .select("id, name, price, category, image_url")
+            .order("created_at", { ascending: false });
+
+          if (error) throw error;
+
+          productsList.replaceChildren();
+
+          if (!data || data.length === 0) {
+            productsList.textContent = "No products added yet.";
+            return;
+          }
+
+          data.forEach((product) => {
+            const item = document.createElement("div");
+            item.className = "product";
+
+            const img = document.createElement("img");
+            img.src = product.image_url || "";
+            img.alt = product.name || "Product image";
+            img.loading = "lazy";
+
+            const title = document.createElement("h3");
+            title.textContent = product.name || "Unnamed product";
+
+            const details = document.createElement("p");
+            details.textContent =
+              (product.category || "Uncategorized") + " — ₦" +
+              Number(product.price).toLocaleString("en-NG");
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "delete-button";
+            deleteButton.textContent = "Delete Product";
+
+            deleteButton.addEventListener("click", async () => {
+              if (deleteButton.disabled) return;
+
+              const confirmed = window.confirm(
+                'Are you sure you want to delete "' +
+                (product.name || "this product") +
+                '"?\n\nThis will remove the product from your database. This action cannot be undone.'
+              );
+
+              if (!confirmed) return;
+
+              deleteButton.disabled = true;
+              deleteButton.textContent = "Deleting...";
+              showMessage("Deleting product...");
+
+              try {
+                // Verify the authenticated administrator before deleting.
+                await requireAdmin();
+
+                // Delete the product record first.
+                const { data: deletedRows, error: deleteError } =
+                  await client
+                    .from("products")
+                    .delete()
+                    .eq("id", product.id)
+                    .select("id");
+
+                if (deleteError) throw deleteError;
+
+                if (!deletedRows || deletedRows.length === 0) {
+                  throw new Error(
+                    "No product was deleted. Check the database permissions and try again."
+                  );
+                }
+
+                // Refresh immediately after the database deletion.
+                await loadProducts();
+
+                showMessage(
+                  "Product deleted successfully.",
+                  true
+                );
+
+                // Remove its image from Storage if the URL belongs to
+                // this project's product-images bucket.
+                if (product.image_url) {
+                  try {
+                    const imageUrl = new URL(product.image_url);
+                    const projectUrl = new URL(
+                      window.STORE_CONFIG.SUPABASE_URL
+                    );
+
+                    const expectedPrefix =
+                      "/storage/v1/object/public/product-images/";
+
+                    if (
+                      imageUrl.origin === projectUrl.origin &&
+                      imageUrl.pathname.startsWith(expectedPrefix)
+                    ) {
+                      const encodedPath =
+                        imageUrl.pathname.slice(expectedPrefix.length);
+
+                      const storagePath = encodedPath
+                        .split("/")
+                        .map((part) => decodeURIComponent(part))
+                        .join("/");
+
+                      if (storagePath && !storagePath.includes("..")) {
+                        const { error: storageError } = await client.storage
+                          .from("product-images")
+                          .remove([storagePath]);
+
+                        if (storageError) {
+                          console.error(
+                            "Product deleted, but image cleanup failed:",
+                            storageError
+                          );
+
+                          showMessage(
+                            "Product deleted, but its image could not be removed from Storage. Check the Storage permissions.",
+                            false
+                          );
+                        }
+                      }
+                    }
+                  } catch (storageCleanupError) {
+                    console.error(
+                      "Product deleted, but image cleanup failed:",
+                      storageCleanupError
+                    );
+
+                    showMessage(
+                      "Product deleted, but image cleanup needs attention.",
+                      false
+                    );
+                  }
+                }
+              } catch (error) {
+                showMessage(
+                  "Could not delete product: " + error.message
+                );
+
+                deleteButton.disabled = false;
+                deleteButton.textContent = "Delete Product";
+              }
+            });
+
+            item.append(img, title, details, deleteButton);
+            productsList.appendChild(item);
+          });
+        } catch (error) {
           productsList.textContent =
             "Could not load products: " + error.message;
-          return;
         }
-
-        productsList.replaceChildren();
-
-        if (!data || data.length === 0) {
-          productsList.textContent = "No products added yet.";
-          return;
-        }
-
-        data.forEach((product) => {
-          const item = document.createElement("div");
-          item.className = "product";
-
-          const img = document.createElement("img");
-          img.src = product.image_url;
-          img.alt = product.name;
-          img.loading = "lazy";
-
-          const title = document.createElement("h3");
-          title.textContent = product.name;
-
-          const details = document.createElement("p");
-          details.textContent =
-            product.category + " — ₦" +
-            Number(product.price).toLocaleString("en-NG");
-
-          item.append(img, title, details);
-          productsList.appendChild(item);
-        });
       }
 
       productForm.addEventListener("submit", async (event) => {
@@ -354,22 +499,12 @@
         saveButton.disabled = true;
 
         let uploadedPath = null;
+        let productInserted = false;
 
         try {
           showMessage("Checking administrator permissions...");
 
-          const { data: authData, error: authError } =
-            await client.auth.getUser();
-
-          if (authError || !authData.user) {
-            throw new Error("Please sign in again.");
-          }
-
-          // Confirm that the signed-in account is the designated admin.
-          if (authData.user.id !==
-              "e3e5a6cc-476a-425b-8c4d-10efccd6e26e") {
-            throw new Error("This account is not authorized as administrator.");
-          }
+          const user = await requireAdmin();
 
           const file = imageFile.files[0];
 
@@ -387,7 +522,7 @@
             .toLowerCase()
             .replace(/[^a-z0-9._-]/g, "-");
 
-          const path = authData.user.id + "/" +
+          const path = user.id + "/" +
             Date.now() + "-" + safeName;
 
           showMessage("Uploading product image...");
@@ -429,6 +564,8 @@
 
           if (insertError) throw insertError;
 
+          productInserted = true;
+
           showMessage(
             "Product added successfully! Check your storefront.",
             true
@@ -442,8 +579,9 @@
         } catch (error) {
           showMessage("Could not add product: " + error.message);
 
-          // If the database insert failed after upload, clean up the unused file.
-          if (uploadedPath) {
+          // Remove the uploaded image only if the database insert
+          // did not succeed.
+          if (uploadedPath && !productInserted) {
             const { error: cleanupError } = await client.storage
               .from("product-images")
               .remove([uploadedPath]);
@@ -457,15 +595,14 @@
         }
       });
 
-      checkSession();
-
       client.auth.onAuthStateChange((event, session) => {
         if (event === "SIGNED_OUT" || !session) {
           dashboard.classList.add("hidden");
           loginSection.classList.remove("hidden");
         }
       });
+
+      checkSession();
     })();
-  </script>
-</body>
+  </script></body>
 </html>
