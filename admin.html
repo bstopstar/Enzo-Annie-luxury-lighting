@@ -2,41 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Dashboard | Enzo Annie Luxury</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      padding: 20px;
+      padding: 18px;
+      background: #101010;
+      color: #f5f5f5;
       font-family: Arial, sans-serif;
-      background: #f4f5f7;
-      color: #222;
     }
 
     .container {
-      max-width: 700px;
-      margin: 30px auto;
-      padding: 25px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+      max-width: 650px;
+      margin: 25px auto;
+      padding: 24px;
+      background: #1b1b1b;
+      border: 1px solid #bd984b;
+      border-radius: 14px;
     }
 
-    h1 {
-      margin-top: 0;
-      color: #172554;
-      font-size: 25px;
-    }
+    h1 { color: #e4bd65; }
 
-    p {
-      color: #666;
-      line-height: 1.6;
-    }
+    p { color: #ccc; line-height: 1.6; }
 
     label {
       display: block;
@@ -44,16 +38,17 @@
       font-weight: bold;
     }
 
-    input, textarea, select, button {
+    input, select, textarea, button {
       width: 100%;
       padding: 12px;
       border-radius: 7px;
       font-size: 16px;
     }
 
-    input, textarea, select {
-      border: 1px solid #ccc;
-      background: white;
+    input, select, textarea {
+      color: #fff;
+      background: #292929;
+      border: 1px solid #555;
     }
 
     textarea {
@@ -63,24 +58,29 @@
 
     button {
       margin-top: 18px;
-      border: none;
-      background: #172554;
-      color: white;
+      border: 0;
+      background: #d7ad52;
+      color: #111;
       font-weight: bold;
       cursor: pointer;
     }
 
-    button:hover {
-      background: #243b78;
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
     }
 
-    .notice {
-      margin-top: 20px;
-      padding: 12px;
-      background: #fff7ed;
-      border-radius: 7px;
-      color: #9a3412;
-      font-size: 14px;
+    .secondary {
+      background: #444;
+      color: white;
+    }
+
+    .hidden { display: none !important; }
+
+    #message {
+      margin-top: 16px;
+      overflow-wrap: anywhere;
+      line-height: 1.5;
     }
 
     #preview {
@@ -90,7 +90,26 @@
       object-fit: contain;
       margin-top: 12px;
       border-radius: 8px;
-      border: 1px solid #ddd;
+      background: #fff;
+    }
+
+    .product {
+      padding: 14px 0;
+      border-bottom: 1px solid #444;
+      overflow-wrap: anywhere;
+    }
+
+    .product img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      background: white;
+      border-radius: 6px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #bbb;
     }
   </style>
 </head>
@@ -98,78 +117,355 @@
 <body>
   <main class="container">
     <h1>Enzo Annie Luxury</h1>
-    <p>Product Administration Dashboard</p>
+    <p>Administrator Dashboard</p>
 
-    <form id="productForm">
-      <label for="name">Product Name</label>
-      <input id="name" name="name" type="text"
-        placeholder="Enter product name" required>
+    <div id="loginSection">
+      <h2>Admin Login</h2>
 
-      <label for="price">Price (₦)</label>
-      <input id="price" name="price" type="number"
-        min="0" step="0.01" placeholder="Enter price" required>
+      <form id="loginForm">
+        <label for="email">Administrator Email</label>
+        <input id="email" type="email" autocomplete="username" required>
 
-      <label for="category">Category</label>
-      <select id="category" name="category" required>
-        <option value="">Choose a category</option>
-        <option value="Lighting">Lighting</option>
-        <option value="Electronics">Electronics</option>
-        <option value="Accessories">Accessories</option>
-        <option value="Other">Other</option>
-      </select>
+        <label for="password">Password</label>
+        <input id="password" type="password"
+          autocomplete="current-password" required>
 
-      <label for="description">Product Description</label>
-      <textarea id="description" name="description"
-        placeholder="Describe the product" required></textarea>
+        <button id="loginButton" type="submit">Sign In</button>
+      </form>
+    </div>
 
-      <label for="imageUrl">Product Image URL</label>
-      <input id="imageUrl" name="imageUrl" type="url"
-        placeholder="https://example.com/product.jpg" required>
+    <div id="dashboard" class="hidden">
+      <p id="signedInAs"></p>
+      <button id="logoutButton" class="secondary" type="button">
+        Sign Out
+      </button>
 
-      <img id="preview" alt="Product image preview">
+      <hr style="margin-top:25px;border-color:#444">
 
-      <button type="submit">Add Product</button>
-    </form>
+      <h2>Add New Product</h2>
+
+      <form id="productForm">
+        <label for="name">Product Name</label>
+        <input id="name" maxlength="150"
+          placeholder="e.g. Luxury Crystal Chandelier" required>
+
+        <label for="price">Price (₦)</label>
+        <input id="price" type="number" min="0" step="0.01"
+          placeholder="e.g. 85000" required>
+
+        <label for="category">Category</label>
+        <select id="category" required>
+          <option value="">Choose a category</option>
+          <option value="Lighting">Lighting</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="description">Product Description</label>
+        <textarea id="description" maxlength="5000"
+          placeholder="Describe your product..." required></textarea>
+
+        <label for="imageFile">Product Image</label>
+        <input id="imageFile" type="file"
+          accept="image/jpeg,image/png,image/webp" required>
+
+        <p class="small">
+          Use a JPG, PNG or WebP image. Maximum size: 5 MB.
+        </p>
+
+        <img id="preview" alt="Selected product image preview">
+
+        <button id="saveButton" type="submit">Upload and Add Product</button>
+      </form>
+
+      <h2 style="margin-top:35px">Your Products</h2>
+      <div id="productsList">Loading products...</div>
+    </div>
 
     <div id="message" role="status" aria-live="polite"></div>
-
-    <div class="notice">
-      <strong>Setup in progress:</strong> This form is currently a
-      visual interface only. It does not save products yet.
-      We will connect it to Supabase in the next step.
-    </div>
   </main>
 
   <script>
-    const imageUrl = document.getElementById("imageUrl");
-    const preview = document.getElementById("preview");
-    const form = document.getElementById("productForm");
-    const message = document.getElementById("message");
+    (() => {
+      const message = document.getElementById("message");
+      const loginSection = document.getElementById("loginSection");
+      const dashboard = document.getElementById("dashboard");
+      const loginForm = document.getElementById("loginForm");
+      const productForm = document.getElementById("productForm");
+      const loginButton = document.getElementById("loginButton");
+      const saveButton = document.getElementById("saveButton");
+      const imageFile = document.getElementById("imageFile");
+      const preview = document.getElementById("preview");
+      const productsList = document.getElementById("productsList");
 
-    imageUrl.addEventListener("input", () => {
-      const url = imageUrl.value.trim();
-
-      if (url) {
-        preview.src = url;
-        preview.style.display = "block";
-      } else {
-        preview.removeAttribute("src");
-        preview.style.display = "none";
+      function showMessage(text, success = false) {
+        message.textContent = text;
+        message.style.color = success ? "#9be7a5" : "#ffb4a8";
       }
-    });
 
-    preview.addEventListener("error", () => {
-      preview.style.display = "none";
-    });
+      if (!window.STORE_CONFIG ||
+          !window.STORE_CONFIG.SUPABASE_URL ||
+          !window.STORE_CONFIG.SUPABASE_ANON_KEY ||
+          !window.supabase) {
+        showMessage("Setup error: Check config.js and the Supabase library.");
+        loginForm.classList.add("hidden");
+        return;
+      }
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
+      const client = window.supabase.createClient(
+        window.STORE_CONFIG.SUPABASE_URL,
+        window.STORE_CONFIG.SUPABASE_ANON_KEY
+      );
 
-      message.textContent =
-        "The dashboard is ready for the database connection. Products are not saved yet.";
-      message.style.color = "#9a3412";
-      message.style.marginTop = "15px";
-    });
+      async function showDashboard(user) {
+        loginSection.classList.add("hidden");
+        dashboard.classList.remove("hidden");
+        document.getElementById("signedInAs").textContent =
+          "Signed in as: " + user.email;
+        showMessage("");
+        await loadProducts();
+      }
+
+      async function checkSession() {
+        const { data, error } = await client.auth.getSession();
+
+        if (error) {
+          showMessage("Could not check login: " + error.message);
+          return;
+        }
+
+        if (data.session) {
+          await showDashboard(data.session.user);
+        }
+      }
+
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        loginButton.disabled = true;
+        showMessage("Signing in...");
+
+        try {
+          const { data, error } = await client.auth.signInWithPassword({
+            email: document.getElementById("email").value.trim(),
+            password: document.getElementById("password").value
+          });
+
+          if (error) throw error;
+
+          await showDashboard(data.user);
+        } catch (error) {
+          showMessage("Sign-in failed: " + error.message);
+        } finally {
+          loginButton.disabled = false;
+        }
+      });
+
+      document.getElementById("logoutButton").addEventListener(
+        "click", async () => {
+          const { error } = await client.auth.signOut();
+
+          if (error) {
+            showMessage("Sign-out failed: " + error.message);
+            return;
+          }
+
+          dashboard.classList.add("hidden");
+          loginSection.classList.remove("hidden");
+          productForm.reset();
+          preview.style.display = "none";
+          productsList.textContent = "";
+          showMessage("You have signed out.", true);
+        }
+      );
+
+      imageFile.addEventListener("change", () => {
+        const file = imageFile.files[0];
+
+        if (!file) {
+          preview.style.display = "none";
+          return;
+        }
+
+        if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+          imageFile.value = "";
+          preview.style.display = "none";
+          showMessage("Choose a JPG, PNG or WebP image.");
+          return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          imageFile.value = "";
+          preview.style.display = "none";
+          showMessage("Image is too large. Maximum size is 5 MB.");
+          return;
+        }
+
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+        showMessage("");
+      });
+
+      async function loadProducts() {
+        productsList.textContent = "Loading products...";
+
+        const { data, error } = await client
+          .from("products")
+          .select("id, name, price, category, image_url")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          productsList.textContent =
+            "Could not load products: " + error.message;
+          return;
+        }
+
+        productsList.replaceChildren();
+
+        if (!data || data.length === 0) {
+          productsList.textContent = "No products added yet.";
+          return;
+        }
+
+        data.forEach((product) => {
+          const item = document.createElement("div");
+          item.className = "product";
+
+          const img = document.createElement("img");
+          img.src = product.image_url;
+          img.alt = product.name;
+          img.loading = "lazy";
+
+          const title = document.createElement("h3");
+          title.textContent = product.name;
+
+          const details = document.createElement("p");
+          details.textContent =
+            product.category + " — ₦" +
+            Number(product.price).toLocaleString("en-NG");
+
+          item.append(img, title, details);
+          productsList.appendChild(item);
+        });
+      }
+
+      productForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        saveButton.disabled = true;
+
+        let uploadedPath = null;
+
+        try {
+          showMessage("Checking administrator permissions...");
+
+          const { data: authData, error: authError } =
+            await client.auth.getUser();
+
+          if (authError || !authData.user) {
+            throw new Error("Please sign in again.");
+          }
+
+          // Confirm that the signed-in account is the designated admin.
+          if (authData.user.id !==
+              "e3e5a6cc-476a-425b-8c4d-10efccd6e26e") {
+            throw new Error("This account is not authorized as administrator.");
+          }
+
+          const file = imageFile.files[0];
+
+          if (!file) throw new Error("Please choose a product image.");
+
+          if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+            throw new Error("Choose a JPG, PNG or WebP image.");
+          }
+
+          if (file.size > 5 * 1024 * 1024) {
+            throw new Error("Image is too large. Maximum size is 5 MB.");
+          }
+
+          const safeName = file.name
+            .toLowerCase()
+            .replace(/[^a-z0-9._-]/g, "-");
+
+          const path = authData.user.id + "/" +
+            Date.now() + "-" + safeName;
+
+          showMessage("Uploading product image...");
+
+          const { error: uploadError } = await client.storage
+            .from("product-images")
+            .upload(path, file, {
+              cacheControl: "3600",
+              upsert: false,
+              contentType: file.type
+            });
+
+          if (uploadError) throw uploadError;
+
+          uploadedPath = path;
+
+          const { data: publicData } = client.storage
+            .from("product-images")
+            .getPublicUrl(path);
+
+          const product = {
+            name: document.getElementById("name").value.trim(),
+            price: Number(document.getElementById("price").value),
+            category: document.getElementById("category").value,
+            description: document.getElementById("description").value.trim(),
+            image_url: publicData.publicUrl
+          };
+
+          if (!product.name || !product.description ||
+              !Number.isFinite(product.price) || product.price < 0) {
+            throw new Error("Check the product name, description and price.");
+          }
+
+          showMessage("Saving product...");
+
+          const { error: insertError } = await client
+            .from("products")
+            .insert(product);
+
+          if (insertError) throw insertError;
+
+          showMessage(
+            "Product added successfully! Check your storefront.",
+            true
+          );
+
+          productForm.reset();
+          preview.removeAttribute("src");
+          preview.style.display = "none";
+
+          await loadProducts();
+        } catch (error) {
+          showMessage("Could not add product: " + error.message);
+
+          // If the database insert failed after upload, clean up the unused file.
+          if (uploadedPath) {
+            const { error: cleanupError } = await client.storage
+              .from("product-images")
+              .remove([uploadedPath]);
+
+            if (cleanupError) {
+              console.error("Unused image cleanup failed:", cleanupError);
+            }
+          }
+        } finally {
+          saveButton.disabled = false;
+        }
+      });
+
+      checkSession();
+
+      client.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_OUT" || !session) {
+          dashboard.classList.add("hidden");
+          loginSection.classList.remove("hidden");
+        }
+      });
+    })();
   </script>
 </body>
 </html>
