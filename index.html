@@ -1,398 +1,954 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enzo Annie Luxury Lighting & Electronics</title>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Enzo Annie</title>
 
-        body {
-            background-color: #fcfcfc;
-            color: #222;
-        }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #ffffff;
-            padding: 15px 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-        .nav-brand h1 {
-            color: #111;
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+    :root {
+      --gold: #c5a059;
+      --ink: #171717;
+      --line: #e8e8e8;
+    }
 
-        .nav-brand h1 span {
-            color: #c5a059; /* Luxury gold tone */
-        }
+    body {
+      background: #f7f7f7;
+      color: #222;
+      min-height: 100vh;
+    }
 
-        .nav-search {
-            display: flex;
-            align-items: center;
-            background: #f4f4f4;
-            padding: 10px 18px;
-            border-radius: 30px;
-            width: 400px;
-            border: 1px solid #e5e5e5;
-        }
+    header {
+      background: white;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-        .nav-search input {
-            border: none;
-            background: transparent;
-            outline: none;
-            margin-left: 10px;
-            width: 100%;
-            font-size: 14px;
-        }
+    header h1 {
+      font-size: 20px;
+    }
 
-        .whatsapp-btn {
-            background: #25d366;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.2s;
-        }
+    header h1 span {
+      color: var(--gold);
+    }
 
-        .whatsapp-btn:hover {
-            background: #20ba5a;
-        }
+    main {
+      max-width: 1050px;
+      margin: 28px auto;
+      padding: 0 18px;
+    }
 
-        /* Layout */
-        .main-container {
-            display: flex;
-            max-width: 1250px;
-            margin: 30px auto;
-            padding: 0 20px;
-            gap: 25px;
-        }
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px #00000005;
+    }
 
-        .sidebar {
-            width: 260px;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            height: fit-content;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-            border: 1px solid #eee;
-        }
+    h2 {
+      font-size: 19px;
+      margin-bottom: 16px;
+    }
 
-        .sidebar h3 {
-            margin-bottom: 15px;
-            font-size: 15px;
-            color: #111;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    .muted {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
 
-        .sidebar ul {
-            list-style: none;
-        }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
 
-        .sidebar li {
-            padding: 12px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 6px;
-            font-size: 14px;
-            color: #555;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background 0.2s, color 0.2s;
-        }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
 
-        .sidebar li i {
-            width: 18px;
-            color: #888;
-        }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #d8d8d8;
+      border-radius: 8px;
+      padding: 11px;
+      font-size: 14px;
+      background: white;
+    }
 
-        .sidebar li:hover, .sidebar li.active {
-            background: #fdfaf3;
-            color: #c5a059;
-            font-weight: 600;
-        }
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
 
-        .sidebar li:hover i, .sidebar li.active i {
-            color: #c5a059;
-        }
+    .full {
+      grid-column: 1 / -1;
+    }
 
-        .feed {
-            flex: 1;
-        }
+    button, .button {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .feed h2 {
-            margin-bottom: 20px;
-            font-size: 20px;
-            color: #111;
-        }
+    .primary {
+      background: #111;
+      color: white;
+    }
 
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-        }
+    .secondary {
+      background: #eee;
+      color: #222;
+    }
 
-        .product-card {
-            background: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #eee;
-        }
+    .danger {
+      background: #fff0f0;
+      color: #a50000;
+    }
 
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
-        }
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
 
-        .product-card img {
-            width: 100%;
-            height: 190px;
-            object-fit: cover;
-            background: #f9f9f9;
-        }
+    .hidden {
+      display: none !important;
+    }
 
-        .product-info {
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
+    .notice {
+      padding: 12px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 14px;
+      line-height: 1.45;
+      background: #f5f5f5;
+    }
 
-        .product-price {
-            font-weight: 700;
-            font-size: 18px;
-            color: #c5a059;
-            margin-bottom: 6px;
-        }
+    .notice.error {
+      background: #fff0f0;
+      color: #8d0000;
+    }
 
-        .product-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #111;
-            margin-bottom: 6px;
-        }
+    .notice.success {
+      background: #effaf0;
+      color: #145b20;
+    }
 
-        .product-desc {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 16px;
-            flex: 1;
-            line-height: 1.4;
-        }
+    .product-row {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding: 13px 0;
+    }
 
-        .order-btn {
-            background: #111;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: background 0.2s;
-        }
+    .product-row img {
+      width: 72px;
+      height: 64px;
+      object-fit: cover;
+      background: #eee;
+      border-radius: 7px;
+    }
 
-        .order-btn:hover {
-            background: #333;
-        }
+    .product-row h3 {
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #888;
-            font-size: 13px;
-            margin-top: 50px;
-            border-top: 1px solid #eaeaea;
-        }
-    </style>
+    .product-row p {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 7px;
+      background: #f5f0e5;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    @media(max-width: 650px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+
+      .product-row {
+        grid-template-columns: 55px 1fr;
+      }
+
+      .product-row img {
+        width: 55px;
+        height: 55px;
+      }
+
+      .product-row .row {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- Header / Brand Logo -->
-    <header class="navbar">
-        <div class="nav-brand">
-            <h1><i class="fa-solid fa-gem"></i> Enzo Annie <span>Luxury Lighting</span></h1>
+<header>
+  <h1>
+    <i class="fa-solid fa-gem"></i>
+    Enzo Annie <span>Admin Dashboard</span>
+  </h1>
+
+  <div class="row">
+    <a class="button secondary" href="index.html">
+      <i class="fa-solid fa-store"></i> View Store
+    </a>
+
+    <button id="logoutBtn" class="secondary hidden">
+      <i class="fa-solid fa-right-from-bracket"></i> Log Out
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section id="configWarning" class="panel hidden">
+    <h2>Connect Your Database First</h2>
+    <p class="muted">
+      Open config.js and enter your Supabase Project URL and public
+      anon/publishable key. Follow SETUP.md to configure your database
+      and administrator account.
+    </p>
+  </section>
+
+  <section id="loginPanel" class="panel">
+    <h2>Administrator Login</h2>
+
+    <p class="muted">
+      This dashboard is for the authorized store administrator.
+      Customers must not be given administrator access.
+    </p>
+
+    <div id="loginNotice" class="notice hidden"></div>
+
+    <form id="loginForm">
+      <div class="form-grid">
+
+        <div>
+          <label for="email">Admin Email</label>
+          <input
+            id="email"
+            type="email"
+            autocomplete="username"
+            required
+          >
         </div>
-        <div class="nav-search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Search chandeliers, wall lights, switches...">
+
+        <div>
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            minlength="8"
+            required
+          >
         </div>
-        <div class="nav-contact">
-            <!-- CHANGE THE NUMBER 2348000000000 TO YOUR WHATSAPP NUMBER -->
-            <a href="https://wa.me/2348000000000" target="_blank" class="whatsapp-btn">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-            </a>
+
+      </div>
+
+      <div class="row" style="margin-top:15px">
+        <button class="primary" type="submit">
+          <i class="fa-solid fa-lock"></i> Sign In
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section id="dashboard" class="hidden">
+
+    <section class="panel">
+
+      <h2 id="formHeading">Add a Product</h2>
+
+      <p class="muted">
+        Add a product name, price, description and image.
+        Prices are entered in Nigerian naira.
+      </p>
+
+      <div id="formNotice" class="notice hidden"></div>
+
+      <form id="productForm">
+
+        <input id="productId" type="hidden">
+
+        <div class="form-grid">
+
+          <div>
+            <label for="title">Product Name *</label>
+            <input
+              id="title"
+              maxlength="120"
+              required
+              placeholder="Modern Gold Crystal Chandelier"
+            >
+          </div>
+
+          <div>
+            <label for="price">Price (₦) *</label>
+            <input
+              id="price"
+              type="number"
+              min="0"
+              step="1"
+              required
+              placeholder="85000"
+            >
+          </div>
+
+          <div>
+            <label for="category">Category *</label>
+
+            <select id="category" required>
+              <option value="chandeliers">
+                Chandeliers & Ceiling Lights
+              </option>
+
+              <option value="bulbs">
+                Bulbs & LED
+              </option>
+
+              <option value="outdoor">
+                Outdoor & Facade Lights
+              </option>
+
+              <option value="wiring">
+                Switches & Sockets
+              </option>
+
+              <option value="electronics">
+                Home Electronics
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label for="imageFile">Product Image</label>
+
+            <input
+              id="imageFile"
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/gif"
+            >
+
+            <p class="hint">
+              JPG, PNG, WEBP or GIF. Maximum 5 MB.
+            </p>
+          </div>
+
+          <div class="full">
+            <label for="description">Product Description *</label>
+
+            <textarea
+              id="description"
+              maxlength="1200"
+              required
+              placeholder="Describe the product, features, size and colour."
+            ></textarea>
+          </div>
+
+          <div class="full">
+            <label>
+              <input
+                id="isPublished"
+                type="checkbox"
+                checked
+                style="width:auto;margin-right:8px"
+              >
+              Publish this product on the customer website
+            </label>
+          </div>
+
         </div>
-    </header>
 
-    <!-- Main Content Layout -->
-    <div class="main-container">
-        <!-- Categories Sidebar -->
-        <aside class="sidebar">
-            <h3>Categories</h3>
-            <ul>
-                <li class="category-item active" data-category="all"><i class="fa-solid fa-border-all"></i> All Collections</li>
-                <li class="category-item" data-category="chandeliers"><i class="fa-solid fa-lightbulb"></i> Luxury Chandeliers</li>
-                <li class="category-item" data-category="outdoor"><i class="fa-solid fa-sun"></i> Outdoor & Facade Lights</li>
-                <li class="category-item" data-category="wiring"><i class="fa-solid fa-plug"></i> Smart Switches & Sockets</li>
-                <li class="category-item" data-category="electronics"><i class="fa-solid fa-house"></i> Home Electronics</li>
-            </ul>
-        </aside>
+        <div class="row" style="margin-top:15px">
 
-        <!-- Product Grid -->
-        <main class="feed">
-            <h2>Architectural & Home Lighting Collection</h2>
-            <div class="product-grid" id="productGrid">
-                <!-- Products load dynamically from JavaScript -->
-            </div>
-        </main>
-    </div>
+          <button class="primary" type="submit" id="saveBtn">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            Save Product
+          </button>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Enzo Annie Luxury Lighting. All rights reserved.</p>
-    </footer>
+          <button
+            class="secondary hidden"
+            type="button"
+            id="cancelEditBtn"
+          >
+            Cancel Edit
+          </button>
 
-    <script>
-        // --- ADD OR UPDATE YOUR LIGHTS & ELECTRONICS STOCK HERE ---
-        let products = [
-            { 
-                title: "Modern Gold Crystal Chandelier", 
-                price: "₦120,000", 
-                category: "chandeliers", 
-                image: "https://images.unsplash.com/photo-1543196414-68f0f0896947?w=500", 
-                desc: "Exquisite multi-tier LED crystal ceiling light designed for luxury building entryways and living rooms." 
-            },
-            { 
-                title: "Architectural Exterior Wall Sconce", 
-                price: "₦25,000", 
-                category: "outdoor", 
-                image: "https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=500", 
-                desc: "Weatherproof up-and-down outdoor LED facade light for modern building exteriors." 
-            },
-            { 
-                title: "Recessed Ceiling Downlights (Set of 6)", 
-                price: "₦22,000", 
-                category: "chandeliers", 
-                image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500", 
-                desc: "High-brightness anti-glare recessed architectural spotlights for homes and offices." 
-            },
-            { 
-                title: "Tempered Glass Smart Touch Switch", 
-                price: "₦15,000", 
-                category: "wiring", 
-                image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500", 
-                desc: "Luxury crystal glass panel light switch with wireless remote and smartphone integration." 
-            },
-            { 
-                title: "Ambient RGB LED Strip Lighting Roll", 
-                price: "₦9,500", 
-                category: "chandeliers", 
-                image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=500", 
-                desc: "Flexible high-lumen lighting strip for POP ceilings, TV consoles, and concealed cove lighting." 
-            },
-            { 
-                title: "Inverter-Compatible Smart Home Fan", 
-                price: "₦48,000", 
-                category: "electronics", 
-                image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500", 
-                desc: "Energy-efficient standing appliance featuring built-in emergency backup battery and LED lamp." 
-            }
-        ];
+        </div>
 
-        const productGrid = document.getElementById("productGrid");
-        const searchInput = document.getElementById("searchInput");
-        const categoryItems = document.querySelectorAll(".sidebar li");
+      </form>
+    </section>
 
-        let currentCategory = "all";
+    <section class="panel">
 
-        function displayProducts(items) {
-            productGrid.innerHTML = "";
-            if (items.length === 0) {
-                productGrid.innerHTML = "<p>No luxury fixtures found matching your search.</p>";
-                return;
-            }
-            
-            items.forEach(product => {
-                // CHANGE THE NUMBER 2348000000000 BELOW TO YOUR WHATSAPP NUMBER
-                const whatsappMessage = encodeURIComponent(`Hello Enzo Annie Luxury Lighting, I would like to inquire about your product: *${product.title}* priced at *${product.price}*. Is it available?`);
-                const whatsappLink = `https://wa.me/2348000000000?text=${whatsappMessage}`;
+      <h2>Your Products</h2>
 
-                const card = document.createElement("div");
-                card.classList.add("product-card");
-                card.innerHTML = `
-                    <img src="${product.image}" alt="${product.title}">
-                    <div class="product-info">
-                        <div class="product-price">${product.price}</div>
-                        <div class="product-title">${product.title}</div>
-                        <div class="product-desc">${product.desc}</div>
-                        <a href="${whatsappLink}" target="_blank" class="order-btn">
-                            <i class="fa-brands fa-whatsapp"></i> Inquire / Order
-                        </a>
-                    </div>
-                `;
-                productGrid.appendChild(card);
-            });
-        }
+      <p class="muted">
+        Edit products, publish or hide listings, and delete products.
+      </p>
 
-        function filterProducts() {
-            const searchText = searchInput.value.toLowerCase();
-            const filtered = products.filter(p => {
-                const matchesCategory = currentCategory === "all" || p.category === currentCategory;
-                const matchesSearch = p.title.toLowerCase().includes(searchText) || p.desc.toLowerCase().includes(searchText);
-                return matchesCategory && matchesSearch;
-            });
-            displayProducts(filtered);
-        }
+      <div id="listNotice" class="notice hidden"></div>
 
-        searchInput.addEventListener("input", filterProducts);
+      <div id="productList">
+        <p class="muted">Loading products...</p>
+      </div>
 
-        categoryItems.forEach(item => {
-            item.addEventListener("click", () => {
-                categoryItems.forEach(i => i.classList.remove("active"));
-                item.classList.add("active");
-                currentCategory = item.getAttribute("data-category");
-                filterProducts();
-            });
-        });
+    </section>
 
-        displayProducts(products);
-    </script>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+
+<script>
+  const $ = id => document.getElementById(id);
+
+  const config = window.STORE_CONFIG || {};
+
+  const configured =
+    config.SUPABASE_URL &&
+    config.SUPABASE_ANON_KEY &&
+    !config.SUPABASE_URL.includes("YOUR_PROJECT");
+
+  let db = null;
+  let products = [];
+  let editingImageUrl = "";
+
+  function notice(id, message, type = "") {
+    const el = $(id);
+
+    el.textContent = message;
+
+    el.className =
+      "notice" + (type ? " " + type : "");
+
+    el.classList.remove("hidden");
+  }
+
+  function clearNotice(id) {
+    $(id).classList.add("hidden");
+  }
+
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, ch => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[ch]));
+  }
+
+  function money(value) {
+    return new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+      maximumFractionDigits: 0
+    }).format(Number(value) || 0);
+  }
+
+  if (!configured || !window.supabase) {
+
+    $("configWarning").classList.remove("hidden");
+    $("loginPanel").classList.add("hidden");
+
+  } else {
+
+    db = window.supabase.createClient(
+      config.SUPABASE_URL,
+      config.SUPABASE_ANON_KEY
+    );
+
+    checkSession();
+  }
+
+  async function checkSession() {
+    const { data, error } = await db.auth.getSession();
+
+    if (error) {
+      console.error(error.message);
+    }
+
+    if (data.session) {
+      await showDashboard();
+    } else {
+      showLogin();
+    }
+  }
+
+  function showLogin() {
+    $("loginPanel").classList.remove("hidden");
+    $("dashboard").classList.add("hidden");
+    $("logoutBtn").classList.add("hidden");
+  }
+
+  async function showDashboard() {
+    $("loginPanel").classList.add("hidden");
+    $("dashboard").classList.remove("hidden");
+    $("logoutBtn").classList.remove("hidden");
+
+    await loadAdminProducts();
+  }
+
+  $("loginForm").addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    clearNotice("loginNotice");
+
+    const { error } = await db.auth.signInWithPassword({
+      email: $("email").value.trim(),
+      password: $("password").value
+    });
+
+    if (error) {
+      notice(
+        "loginNotice",
+        "Sign-in failed. Check your email and password and confirm that your account has administrator permission.",
+        "error"
+      );
+
+      return;
+    }
+
+    await showDashboard();
+
+  });
+
+  $("logoutBtn").addEventListener("click", async () => {
+    await db.auth.signOut();
+    showLogin();
+  });
+
+  $("cancelEditBtn").addEventListener("click", resetForm);
+
+  async function loadAdminProducts() {
+
+    $("productList").innerHTML =
+      '<p class="muted">Loading products...</p>';
+
+    const { data, error } = await db
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+
+      $("productList").innerHTML = "";
+
+      notice(
+        "listNotice",
+        "Could not load products. Check your database setup and administrator permissions.",
+        "error"
+      );
+
+      return;
+    }
+
+    products = data || [];
+
+    renderAdminProducts();
+  }
+
+  function renderAdminProducts() {
+
+    const root = $("productList");
+
+    if (!products.length) {
+
+      root.innerHTML =
+        '<p class="muted" style="padding-top:14px">No products yet. Use the form above to add your first product.</p>';
+
+      return;
+    }
+
+    root.innerHTML = products.map(product => `
+      <article class="product-row">
+
+        <img
+          src="${escapeHTML(product.image_url || "")}"
+          alt=""
+          onerror="this.style.visibility='hidden'"
+        >
+
+        <div>
+          <h3>${escapeHTML(product.title)}</h3>
+
+          <p>
+            ${money(product.price)} ·
+            ${escapeHTML(product.category)}
+          </p>
+
+          <span class="badge">
+            ${product.is_published ? "Published" : "Draft / hidden"}
+          </span>
+        </div>
+
+        <div class="row">
+
+          <button
+            class="secondary"
+            type="button"
+            data-edit="${escapeHTML(product.id)}"
+          >
+            <i class="fa-solid fa-pen"></i> Edit
+          </button>
+
+          <button
+            class="secondary"
+            type="button"
+            data-toggle="${escapeHTML(product.id)}"
+          >
+            ${product.is_published ? "Unpublish" : "Publish"}
+          </button>
+
+          <button
+            class="danger"
+            type="button"
+            data-delete="${escapeHTML(product.id)}"
+          >
+            <i class="fa-solid fa-trash"></i> Delete
+          </button>
+
+        </div>
+
+      </article>
+    `).join("");
+
+    root.querySelectorAll("[data-edit]").forEach(button => {
+      button.addEventListener("click", () => {
+        editProduct(button.dataset.edit);
+      });
+    });
+
+    root.querySelectorAll("[data-toggle]").forEach(button => {
+      button.addEventListener("click", () => {
+        togglePublish(button.dataset.toggle);
+      });
+    });
+
+    root.querySelectorAll("[data-delete]").forEach(button => {
+      button.addEventListener("click", () => {
+        deleteProduct(button.dataset.delete);
+      });
+    });
+  }
+
+  function editProduct(id) {
+
+    const product = products.find(
+      item => String(item.id) === String(id)
+    );
+
+    if (!product) return;
+
+    $("productId").value = product.id;
+    $("title").value = product.title;
+    $("price").value = product.price;
+    $("category").value = product.category;
+    $("description").value = product.description;
+
+    $("isPublished").checked = !!product.is_published;
+
+    editingImageUrl = product.image_url || "";
+
+    $("formHeading").textContent = "Edit Product";
+
+    $("saveBtn").innerHTML =
+      '<i class="fa-solid fa-floppy-disk"></i> Update Product';
+
+    $("cancelEditBtn").classList.remove("hidden");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function resetForm() {
+
+    $("productForm").reset();
+
+    $("productId").value = "";
+
+    editingImageUrl = "";
+
+    $("formHeading").textContent = "Add a Product";
+
+    $("saveBtn").innerHTML =
+      '<i class="fa-solid fa-cloud-arrow-up"></i> Save Product';
+
+    $("cancelEditBtn").classList.add("hidden");
+
+    clearNotice("formNotice");
+  }
+
+  async function uploadImage(file) {
+
+    if (!file) return editingImageUrl;
+
+    const allowed = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif"
+    ];
+
+    if (!allowed.includes(file.type)) {
+      throw new Error(
+        "Please choose a JPG, PNG, WEBP or GIF image."
+      );
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      throw new Error(
+        "Image must be 5 MB or smaller."
+      );
+    }
+
+    const extension = file.name
+      .split(".")
+      .pop()
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "") || "jpg";
+
+    const path = `${crypto.randomUUID()}.${extension}`;
+
+    const { error } = await db
+      .storage
+      .from("product-images")
+      .upload(path, file, {
+        upsert: false,
+        contentType: file.type
+      });
+
+    if (error) {
+      throw new Error(
+        "Image upload failed: " + error.message
+      );
+    }
+
+    const { data } = db
+      .storage
+      .from("product-images")
+      .getPublicUrl(path);
+
+    return data.publicUrl;
+  }
+
+  $("productForm").addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    clearNotice("formNotice");
+
+    $("saveBtn").disabled = true;
+    $("saveBtn").textContent = "Saving...";
+
+    try {
+
+      const imageUrl = await uploadImage(
+        $("imageFile").files[0]
+      );
+
+      const payload = {
+        title: $("title").value.trim(),
+        price: Number($("price").value),
+        category: $("category").value,
+        description: $("description").value.trim(),
+        image_url: imageUrl,
+        is_published: $("isPublished").checked
+      };
+
+      if (
+        !payload.title ||
+        !payload.description ||
+        !Number.isFinite(payload.price) ||
+        payload.price < 0
+      ) {
+        throw new Error(
+          "Enter a product name, valid price and description."
+        );
+      }
+
+      let result;
+
+      if ($("productId").value) {
+
+        result = await db
+          .from("products")
+          .update(payload)
+          .eq("id", $("productId").value)
+          .select()
+          .single();
+
+      } else {
+
+        result = await db
+          .from("products")
+          .insert(payload)
+          .select()
+          .single();
+
+      }
+
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
+
+      notice(
+        "formNotice",
+        "Product saved successfully. Published products will appear on your customer website.",
+        "success"
+      );
+
+      resetForm();
+
+      await loadAdminProducts();
+
+    } catch (error) {
+
+      notice(
+        "formNotice",
+        error.message || "Something went wrong while saving this product.",
+        "error"
+      );
+
+    } finally {
+
+      $("saveBtn").disabled = false;
+
+      $("saveBtn").innerHTML =
+        '<i class="fa-solid fa-cloud-arrow-up"></i> Save Product';
+
+    }
+
+  });
+
+  async function togglePublish(id) {
+
+    const product = products.find(
+      item => String(item.id) === String(id)
+    );
+
+    if (!product) return;
+
+    const { error } = await db
+      .from("products")
+      .update({
+        is_published: !product.is_published
+      })
+      .eq("id", id);
+
+    if (error) {
+
+      notice(
+        "listNotice",
+        "Could not change publication status: " + error.message,
+        "error"
+      );
+
+      return;
+    }
+
+    await loadAdminProducts();
+  }
+
+  async function deleteProduct(id) {
+
+    const product = products.find(
+      item => String(item.id) === String(id)
+    );
+
+    if (!product) return;
+
+    if (!confirm(
+      `Delete "${product.title}"? This cannot be undone.`
+    )) {
+      return;
+    }
+
+    const { error } = await db
+      .from("products")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+
+      notice(
+        "listNotice",
+        "Could not delete product: " + error.message,
+        "error"
+      );
+
+      return;
+    }
+
+    notice(
+      "listNotice",
+      "Product deleted.",
+      "success"
+    );
+
+    await loadAdminProducts();
+  }
+
+</script>
+
 </body>
 </html>
