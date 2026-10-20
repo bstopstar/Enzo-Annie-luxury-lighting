@@ -676,10 +676,7 @@
     <p>&copy; <span id="current-year"></span> Enzo Annie. All rights reserved.</p>
   </footer>
 
-  <!-- Supabase JavaScript library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- Your existing configuration file -->
   <script src="config.js"></script>
 
   <script>
@@ -697,7 +694,6 @@
       document.getElementById("current-year").textContent =
         new Date().getFullYear();
 
-      // Safely display messages.
       function showMessage(title, message, buttonText, buttonAction) {
         grid.replaceChildren();
 
@@ -723,7 +719,6 @@
         grid.appendChild(box);
       }
 
-      // Display prices in Nigerian Naira.
       function formatPrice(price) {
         const amount = Number(price);
 
@@ -738,7 +733,74 @@
         }).format(amount);
       }
 
-      // Create a product card.
+      // Let customers choose which WhatsApp number to use.
+      function enquireAboutProduct(product) {
+        const config = window.STORE_CONFIG || {};
+
+        const numbers = [
+          {
+            number: config.WHATSAPP_NUMBER_1,
+            label: "WhatsApp 1"
+          },
+          {
+            number: config.WHATSAPP_NUMBER_2,
+            label: "WhatsApp 2"
+          }
+        ].filter(item => String(item.number || "").replace(/\D/g, ""));
+
+        if (numbers.length === 0) {
+          window.alert(
+            "The store's WhatsApp contacts are not configured. Please try again later."
+          );
+          return;
+        }
+
+        let choice;
+
+        if (numbers.length === 1) {
+          choice = numbers[0];
+        } else {
+          const answer = window.prompt(
+            "Choose which WhatsApp number to contact:\n\n" +
+            "1. WhatsApp 1\n" +
+            "2. WhatsApp 2\n\n" +
+            "Enter 1 or 2:"
+          );
+
+          if (answer === null) {
+            return;
+          }
+
+          const selectedIndex = Number(answer) - 1;
+
+          if (
+            !Number.isInteger(selectedIndex) ||
+            selectedIndex < 0 ||
+            selectedIndex >= numbers.length
+          ) {
+            window.alert("Invalid choice. Please enter 1 or 2.");
+            return;
+          }
+
+          choice = numbers[selectedIndex];
+        }
+
+        const number = String(choice.number).replace(/\D/g, "");
+
+        const message =
+          "Hello Enzo Annie! I am interested in this product:\n\n" +
+          "Product: " + (product.name || "Product") + "\n" +
+          "Price: " + formatPrice(product.price) + "\n" +
+          "Category: " + (product.category || "General") + "\n\n" +
+          "Please provide more details.";
+
+        const url =
+          "https://wa.me/" + number +
+          "?text=" + encodeURIComponent(message);
+
+        window.open(url, "_blank");
+      }
+
       function makeProductCard(product) {
         const card = document.createElement("article");
         card.className = "product-card";
@@ -753,28 +815,24 @@
 
         if (product.image_url) {
           image.src = product.image_url;
+          image.addEventListener("error", () => {
+            image.style.display = "none";
+            imageWrap.style.display = "grid";
+            imageWrap.style.placeItems = "center";
+
+            const placeholder = document.createElement("span");
+            placeholder.textContent = "Image unavailable";
+            placeholder.style.color = "#777";
+            placeholder.style.fontSize = "12px";
+
+            imageWrap.appendChild(placeholder);
+          }, { once: true });
+
+          imageWrap.appendChild(image);
         } else {
-          image.style.display = "none";
           imageWrap.textContent = "Image unavailable";
           imageWrap.style.display = "grid";
           imageWrap.style.placeItems = "center";
-        }
-
-        image.addEventListener("error", () => {
-          image.style.display = "none";
-          imageWrap.style.display = "grid";
-          imageWrap.style.placeItems = "center";
-
-          const placeholder = document.createElement("span");
-          placeholder.textContent = "Image unavailable";
-          placeholder.style.color = "#777";
-          placeholder.style.fontSize = "12px";
-
-          imageWrap.appendChild(placeholder);
-        }, { once: true });
-
-        if (product.image_url) {
-          imageWrap.appendChild(image);
         }
 
         const badge = document.createElement("span");
@@ -805,29 +863,7 @@
         button.textContent = "Enquire";
 
         button.addEventListener("click", () => {
-          const config = window.STORE_CONFIG || {};
-
-          const number = String(
-            config.WHATSAPP_NUMBER_1 || ""
-          ).replace(/\D/g, "");
-
-          if (!number) {
-            window.alert("Please contact the store for product enquiries.");
-            return;
-          }
-
-          const message =
-            "Hello Enzo Annie! I am interested in this product:\n\n" +
-            "Product: " + (product.name || "Product") + "\n" +
-            "Price: " + formatPrice(product.price) + "\n" +
-            "Category: " + (product.category || "General") + "\n\n" +
-            "Please provide more details.";
-
-          const url =
-            "https://wa.me/" + number +
-            "?text=" + encodeURIComponent(message);
-
-          window.open(url, "_blank", "noopener,noreferrer");
+          enquireAboutProduct(product);
         });
 
         bottom.append(price, button);
@@ -837,7 +873,6 @@
         return card;
       }
 
-      // Filter products by category and search.
       function renderProducts() {
         const searchTerm = searchInput.value.trim().toLowerCase();
 
@@ -916,7 +951,7 @@
 
       searchInput.addEventListener("input", renderProducts);
 
-      // Create WhatsApp contact buttons using config.js.
+      // Display both WhatsApp contact buttons.
       function setupWhatsApp() {
         const config = window.STORE_CONFIG || {};
 
@@ -925,11 +960,11 @@
         const numbers = [
           {
             number: config.WHATSAPP_NUMBER_1,
-            label: "Chat on WhatsApp"
+            label: "Contact WhatsApp 1"
           },
           {
             number: config.WHATSAPP_NUMBER_2,
-            label: "Alternative WhatsApp"
+            label: "Contact WhatsApp 2"
           }
         ];
 
@@ -961,7 +996,6 @@
         }
       }
 
-      // Connect to Supabase and load products.
       async function loadProducts() {
         const config = window.STORE_CONFIG;
 
