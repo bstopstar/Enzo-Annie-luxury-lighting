@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Enzo Annie Luxury</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f4f5f7;
+      color: #222;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 25px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #172554;
+      font-size: 25px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 7px;
+      font-weight: bold;
+    }
+
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    input, textarea, select {
+      border: 1px solid #ccc;
+      background: white;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 18px;
+      border: none;
+      background: #172554;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #243b78;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 12px;
+      background: #fff7ed;
+      border-radius: 7px;
+      color: #9a3412;
+      font-size: 14px;
+    }
+
+    #preview {
+      display: none;
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      margin-top: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Enzo Annie Luxury</h1>
+    <p>Product Administration Dashboard</p>
+
+    <form id="productForm">
+      <label for="name">Product Name</label>
+      <input id="name" name="name" type="text"
+        placeholder="Enter product name" required>
+
+      <label for="price">Price (₦)</label>
+      <input id="price" name="price" type="number"
+        min="0" step="0.01" placeholder="Enter price" required>
+
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">Choose a category</option>
+        <option value="Lighting">Lighting</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="description">Product Description</label>
+      <textarea id="description" name="description"
+        placeholder="Describe the product" required></textarea>
+
+      <label for="imageUrl">Product Image URL</label>
+      <input id="imageUrl" name="imageUrl" type="url"
+        placeholder="https://example.com/product.jpg" required>
+
+      <img id="preview" alt="Product image preview">
+
+      <button type="submit">Add Product</button>
+    </form>
+
+    <div id="message" role="status" aria-live="polite"></div>
+
+    <div class="notice">
+      <strong>Setup in progress:</strong> This form is currently a
+      visual interface only. It does not save products yet.
+      We will connect it to Supabase in the next step.
+    </div>
+  </main>
+
+  <script>
+    const imageUrl = document.getElementById("imageUrl");
+    const preview = document.getElementById("preview");
+    const form = document.getElementById("productForm");
+    const message = document.getElementById("message");
+
+    imageUrl.addEventListener("input", () => {
+      const url = imageUrl.value.trim();
+
+      if (url) {
+        preview.src = url;
+        preview.style.display = "block";
+      } else {
+        preview.removeAttribute("src");
+        preview.style.display = "none";
+      }
+    });
+
+    preview.addEventListener("error", () => {
+      preview.style.display = "none";
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      message.textContent =
+        "The dashboard is ready for the database connection. Products are not saved yet.";
+      message.style.color = "#9a3412";
+      message.style.marginTop = "15px";
+    });
+  </script>
+</body>
+</html>
