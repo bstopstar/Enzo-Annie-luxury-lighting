@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Enzo Annie Luxury | Luxury Lighting & Electronics</title><meta
+name="description"
+content="Discover luxury lighting, electronics, and accessories at Enzo Annie Luxury. Explore our products and contact us directly on WhatsApp."
 
-  <title>Enzo Annie Luxury | Luxury Lighting & Electronics</title>
+«»
 
-  <meta
-    name="description"
-    content="Discover luxury lighting, electronics, and accessories at Enzo Annie Luxury. Explore our products and contact us directly on WhatsApp."
-  >
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
-
-  <style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script src="config.js"></script>  <style>
     :root {
       --black: #080808;
       --dark: #111111;
@@ -149,18 +142,29 @@
       white-space: nowrap;
     }
 
+    /* ==================================================
+       LUXURY HERO TEMPLATE — UPDATED DESIGN ONLY
+       Black and gold theme, chandelier image and reflection.
+       ================================================== */
+
     .hero {
       min-height: 560px;
       display: flex;
       align-items: center;
       background:
-        radial-gradient(ellipse at 75% 40%, rgba(212, 175, 55, 0.12), transparent 45%),
+        radial-gradient(
+          ellipse at 76% 35%,
+          rgba(212, 175, 55, 0.16),
+          transparent 42%
+        ),
         linear-gradient(110deg, #080808 25%, #17130a 100%);
       border-bottom: 1px solid var(--border);
       position: relative;
+      isolation: isolate;
       overflow: hidden;
     }
 
+    /* Keep the original decorative background lettering. */
     .hero::after {
       content: "LUXURY";
       position: absolute;
@@ -171,13 +175,119 @@
       font-weight: bold;
       color: rgba(212, 175, 55, 0.035);
       pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Decorative lighting artwork on the right side. */
+    .hero-light-art {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 55%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    /* Soft golden illumination behind the chandelier. */
+    .hero-light-glow {
+      position: absolute;
+      width: 78%;
+      height: 68%;
+      top: 8%;
+      right: 5%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(255, 209, 93, 0.23) 0%,
+        rgba(212, 175, 55, 0.12) 28%,
+        rgba(212, 175, 55, 0.045) 52%,
+        transparent 75%
+      );
+      filter: blur(18px);
+      animation: luxuryGlow 5s ease-in-out infinite alternate;
+    }
+
+    /* The chandelier photograph blends into the black background. */
+    .hero-chandelier {
+      position: absolute;
+      width: 100%;
+      height: 91%;
+      top: 0;
+      right: -1%;
+      object-fit: contain;
+      object-position: center;
+      opacity: 0.96;
+      filter:
+        brightness(0.94)
+        contrast(1.06)
+        drop-shadow(0 12px 28px rgba(212, 175, 55, 0.16));
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 8%,
+        #000 65%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 8%,
+        #000 65%,
+        transparent 100%
+      );
+    }
+
+    /* Reflection beneath the chandelier. */
+    .hero-light-reflection {
+      position: absolute;
+      width: 76%;
+      height: 28%;
+      right: 6%;
+      bottom: 1%;
+      background-image: url("https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?auto=format&fit=crop&w=1000&q=85");
+      background-size: cover;
+      background-position: center 62%;
+      opacity: 0.20;
+      filter: blur(3px) brightness(1.25) sepia(0.35);
+      transform: perspective(220px) rotateX(58deg) scaleY(0.9);
+      transform-origin: center top;
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.8),
+        transparent 90%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.8),
+        transparent 90%
+      );
+    }
+
+    /* Golden light reflected across the floor. */
+    .hero-floor-glow {
+      position: absolute;
+      bottom: -12%;
+      right: 0;
+      width: 70%;
+      height: 35%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(244, 196, 76, 0.19),
+        rgba(212, 175, 55, 0.07) 38%,
+        transparent 72%
+      );
+      filter: blur(15px);
     }
 
     .hero-content {
       max-width: 720px;
       padding: 80px 0;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .eyebrow {
@@ -195,6 +305,7 @@
       line-height: 1.1;
       margin-bottom: 22px;
       font-weight: normal;
+      text-shadow: 0 3px 25px rgba(0, 0, 0, 0.35);
     }
 
     .hero h1 span {
@@ -246,6 +357,17 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+    }
+
+    @keyframes luxuryGlow {
+      from {
+        opacity: 0.7;
+        transform: scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1.05);
+      }
     }
 
     .features {
@@ -935,12 +1057,50 @@
         font-size: 11px;
       }
 
+      /* Hero remains attractive and readable on phones. */
       .hero {
-        min-height: 490px;
+        min-height: 540px;
+        align-items: flex-start;
       }
 
       .hero-content {
-        padding: 65px 0;
+        padding: 60px 0 235px;
+      }
+
+      .hero-light-art {
+        width: 100%;
+        height: 310px;
+        top: auto;
+        bottom: 0;
+        right: 0;
+      }
+
+      .hero-light-glow {
+        width: 90%;
+        height: 90%;
+        top: 0;
+        right: 5%;
+      }
+
+      .hero-chandelier {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        object-position: center 38%;
+      }
+
+      .hero-light-reflection {
+        width: 70%;
+        height: 23%;
+        right: 15%;
+        bottom: 0;
+      }
+
+      .hero-floor-glow {
+        width: 100%;
+        height: 35%;
+        bottom: -8%;
       }
 
       section {
@@ -1060,6 +1220,26 @@
         width: 36px;
         height: 36px;
       }
+
+      .hero {
+        min-height: 520px;
+      }
+
+      .hero-content {
+        padding-bottom: 220px;
+      }
+
+      .hero-light-art {
+        height: 280px;
+      }
+
+      .hero h1 {
+        font-size: clamp(35px, 10vw, 43px);
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1068,244 +1248,248 @@
       *::after {
         scroll-behavior: auto !important;
         transition: none !important;
+        animation: none !important;
       }
     }
-  </style>
-</head>
-
-<body>
+  </style></head><body>
   <div class="announcement">
     ELEGANCE • QUALITY • LUXURY — WELCOME TO ENZO ANNIE LUXURY
-  </div>
-
-  <header>
+  </div>  <header>
     <div class="container header-inner">
       <a class="logo" href="#home">
         ENZO ANNIE
         <small>L U X U R Y</small>
-      </a>
+      </a>  <nav aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-      <nav aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#categories">Categories</a>
-        <a href="#products">Products</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+  <a class="header-whatsapp" id="headerWhatsApp" href="#contact">
+    Contact Us
+  </a>
+</div>
 
-      <a class="header-whatsapp" id="headerWhatsApp" href="#contact">
-        Contact Us
-      </a>
+  </header>  <main>
+    <section class="hero" id="home">  <!-- NEW DECORATIVE CHANDELIER ARTWORK -->
+  <div class="hero-light-art" aria-hidden="true">
+    <div class="hero-light-glow"></div>
+
+    <img
+      class="hero-chandelier"
+      src="https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?auto=format&fit=crop&w=1200&q=90"
+      alt=""
+      fetchpriority="high"
+      onerror="this.style.display='none'"
+    >
+
+    <div class="hero-light-reflection"></div>
+    <div class="hero-floor-glow"></div>
+  </div>
+  <!-- END NEW DECORATIVE CHANDELIER ARTWORK -->
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="eyebrow">Experience Everyday Luxury</div>
+
+      <h1>
+        Elevate Your Space With
+        <span>Timeless Elegance.</span>
+      </h1>
+
+      <p>
+        Discover elegant lighting, quality electronics, and stylish
+        accessories carefully selected to bring beauty, comfort, and
+        sophistication into your everyday life.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#products" class="btn btn-gold">EXPLORE OUR PRODUCTS</a>
+        <a href="#contact" class="btn btn-outline">CONTACT US</a>
+      </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container">
-        <div class="hero-content">
-          <div class="eyebrow">Experience Everyday Luxury</div>
+<section class="features">
+  <div class="container features-grid">
+    <div class="feature">
+      <div class="feature-icon">✦</div>
+      <h3>Quality Selection</h3>
+      <p>Products chosen with style and quality in mind.</p>
+    </div>
 
-          <h1>
-            Elevate Your Space With
-            <span>Timeless Elegance.</span>
-          </h1>
+    <div class="feature">
+      <div class="feature-icon">◆</div>
+      <h3>Elegant Designs</h3>
+      <p>Beautiful products for modern living.</p>
+    </div>
 
-          <p>
-            Discover elegant lighting, quality electronics, and stylish
-            accessories carefully selected to bring beauty, comfort, and
-            sophistication into your everyday life.
-          </p>
+    <div class="feature">
+      <div class="feature-icon">☎</div>
+      <h3>Direct Enquiries</h3>
+      <p>Contact us directly to ask about any product.</p>
+    </div>
+  </div>
+</section>
 
-          <div class="hero-buttons">
-            <a href="#products" class="btn btn-gold">EXPLORE OUR PRODUCTS</a>
-            <a href="#contact" class="btn btn-outline">CONTACT US</a>
-          </div>
-        </div>
-      </div>
-    </section>
+<section class="categories" id="categories">
+  <div class="container">
+    <div class="section-heading">
+      <div class="eyebrow">Explore Our Collection</div>
+      <h2>Shop By <span class="gold">Category</span></h2>
+      <p>Find the products that suit your style and needs.</p>
+    </div>
 
-    <section class="features">
-      <div class="container features-grid">
-        <div class="feature">
-          <div class="feature-icon">✦</div>
-          <h3>Quality Selection</h3>
-          <p>Products chosen with style and quality in mind.</p>
-        </div>
+    <div class="category-grid">
+      <button class="category-card" type="button" data-category="Lighting">
+        <span class="icon">💡</span>
+        <h3>Lighting</h3>
+      </button>
 
-        <div class="feature">
-          <div class="feature-icon">◆</div>
-          <h3>Elegant Designs</h3>
-          <p>Beautiful products for modern living.</p>
-        </div>
+      <button class="category-card" type="button" data-category="Electronics">
+        <span class="icon">⚡</span>
+        <h3>Electronics</h3>
+      </button>
 
-        <div class="feature">
-          <div class="feature-icon">☎</div>
-          <h3>Direct Enquiries</h3>
-          <p>Contact us directly to ask about any product.</p>
-        </div>
-      </div>
-    </section>
+      <button class="category-card" type="button" data-category="Accessories">
+        <span class="icon">✧</span>
+        <h3>Accessories</h3>
+      </button>
 
-    <section class="categories" id="categories">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Explore Our Collection</div>
-          <h2>Shop By <span class="gold">Category</span></h2>
-          <p>Find the products that suit your style and needs.</p>
-        </div>
+      <button class="category-card" type="button" data-category="All">
+        <span class="icon">◇</span>
+        <h3>All Products</h3>
+      </button>
+    </div>
+  </div>
+</section>
 
-        <div class="category-grid">
-          <button class="category-card" type="button" data-category="Lighting">
-            <span class="icon">💡</span>
-            <h3>Lighting</h3>
-          </button>
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-heading">
+      <div class="eyebrow">Our Products</div>
+      <h2>Discover Our <span class="gold">Collection</span></h2>
+      <p>
+        Explore our products, view their pictures, and contact us directly
+        for enquiries.
+      </p>
+    </div>
 
-          <button class="category-card" type="button" data-category="Electronics">
-            <span class="icon">⚡</span>
-            <h3>Electronics</h3>
-          </button>
-
-          <button class="category-card" type="button" data-category="Accessories">
-            <span class="icon">✧</span>
-            <h3>Accessories</h3>
-          </button>
-
-          <button class="category-card" type="button" data-category="All">
-            <span class="icon">◇</span>
-            <h3>All Products</h3>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="products-section" id="products">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Our Products</div>
-          <h2>Discover Our <span class="gold">Collection</span></h2>
-          <p>
-            Explore our products, view their pictures, and contact us directly
-            for enquiries.
-          </p>
-        </div>
-
-        <div class="product-tools">
-          <div class="search-box">
-            <input
-              type="search"
-              id="productSearch"
-              placeholder="Search products..."
-              aria-label="Search products"
-            >
-          </div>
-
-          <div class="category-filters" aria-label="Filter products by category">
-            <button class="filter-btn active" type="button" data-category="All">
-              All
-            </button>
-
-            <button class="filter-btn" type="button" data-category="Lighting">
-              Lighting
-            </button>
-
-            <button class="filter-btn" type="button" data-category="Electronics">
-              Electronics
-            </button>
-
-            <button class="filter-btn" type="button" data-category="Accessories">
-              Accessories
-            </button>
-          </div>
-        </div>
-
-        <div class="product-grid" id="productGrid" aria-live="polite">
-          <div class="state-message">
-            <strong>Loading Our Collection...</strong>
-            Please wait while we fetch our latest products.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="about" id="about">
-      <div class="container about-grid">
-        <div class="about-art">
-          <div>
-            ENZO ANNIE
-            <span>L U X U R Y</span>
-          </div>
-        </div>
-
-        <div class="about-copy">
-          <div class="eyebrow">About Our Brand</div>
-
-          <h2>
-            Where Quality Meets
-            <span class="gold">Elegance.</span>
-          </h2>
-
-          <p>
-            At Enzo Annie Luxury, we believe that the right details can
-            transform an ordinary space into something extraordinary.
-          </p>
-
-          <p>
-            Our collection brings together lighting, electronics, and
-            accessories selected to help you create a beautiful, comfortable,
-            and stylish environment.
-          </p>
-
-          <p>
-            Browse our collection, explore product pictures, and reach out
-            directly whenever you need more information.
-          </p>
-
-          <a href="#products" class="btn btn-gold">EXPLORE THE COLLECTION</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="container contact-content">
-        <div class="eyebrow">We Are Here To Help</div>
-
-        <h2>Let's Find Something <span class="gold">Perfect For You.</span></h2>
-
-        <p>
-          Have a question about a product? Contact Enzo Annie Luxury directly
-          on WhatsApp for enquiries and further information.
-        </p>
-
-        <a
-          href="#"
-          class="btn btn-gold"
-          id="contactWhatsApp"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div class="product-tools">
+      <div class="search-box">
+        <input
+          type="search"
+          id="productSearch"
+          placeholder="Search products..."
+          aria-label="Search products"
         >
-          CHAT WITH US ON WHATSAPP
-        </a>
       </div>
-    </section>
-  </main>
 
-  <footer>
+      <div class="category-filters" aria-label="Filter products by category">
+        <button class="filter-btn active" type="button" data-category="All">
+          All
+        </button>
+
+        <button class="filter-btn" type="button" data-category="Lighting">
+          Lighting
+        </button>
+
+        <button class="filter-btn" type="button" data-category="Electronics">
+          Electronics
+        </button>
+
+        <button class="filter-btn" type="button" data-category="Accessories">
+          Accessories
+        </button>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid" aria-live="polite">
+      <div class="state-message">
+        <strong>Loading Our Collection...</strong>
+        Please wait while we fetch our latest products.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="about-art">
+      <div>
+        ENZO ANNIE
+        <span>L U X U R Y</span>
+      </div>
+    </div>
+
+    <div class="about-copy">
+      <div class="eyebrow">About Our Brand</div>
+
+      <h2>
+        Where Quality Meets
+        <span class="gold">Elegance.</span>
+      </h2>
+
+      <p>
+        At Enzo Annie Luxury, we believe that the right details can
+        transform an ordinary space into something extraordinary.
+      </p>
+
+      <p>
+        Our collection brings together lighting, electronics, and
+        accessories selected to help you create a beautiful, comfortable,
+        and stylish environment.
+      </p>
+
+      <p>
+        Browse our collection, explore product pictures, and reach out
+        directly whenever you need more information.
+      </p>
+
+      <a href="#products" class="btn btn-gold">EXPLORE THE COLLECTION</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container contact-content">
+    <div class="eyebrow">We Are Here To Help</div>
+
+    <h2>Let's Find Something <span class="gold">Perfect For You.</span></h2>
+
+    <p>
+      Have a question about a product? Contact Enzo Annie Luxury directly
+      on WhatsApp for enquiries and further information.
+    </p>
+
+    <a
+      href="#"
+      class="btn btn-gold"
+      id="contactWhatsApp"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      CHAT WITH US ON WHATSAPP
+    </a>
+  </div>
+</section>
+
+  </main>  <footer>
     <div class="container footer-inner">
       <div class="footer-copy">
         © <span id="currentYear"></span> Enzo Annie Luxury. All rights reserved.
-      </div>
+      </div>  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
 
-      <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#products">Products</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Product Gallery Modal -->
-  <div
+  </footer>  <!-- Product Gallery Modal -->  <div
     class="gallery-modal"
     id="galleryModal"
     role="dialog"
@@ -1321,88 +1505,83 @@
         aria-label="Close product gallery"
       >
         &times;
+      </button>  <div class="gallery-visual">
+    <div class="gallery-main-image-wrap" id="gallerySwipeArea">
+      <img
+        class="gallery-main-image"
+        id="galleryMainImage"
+        src=""
+        alt=""
+      >
+
+      <button
+        class="gallery-nav gallery-prev"
+        id="galleryPrev"
+        type="button"
+        aria-label="Previous picture"
+      >
+        &#8249;
       </button>
 
-      <div class="gallery-visual">
-        <div class="gallery-main-image-wrap" id="gallerySwipeArea">
-          <img
-            class="gallery-main-image"
-            id="galleryMainImage"
-            src=""
-            alt=""
-          >
-
-          <button
-            class="gallery-nav gallery-prev"
-            id="galleryPrev"
-            type="button"
-            aria-label="Previous picture"
-          >
-            &#8249;
-          </button>
-
-          <button
-            class="gallery-nav gallery-next"
-            id="galleryNext"
-            type="button"
-            aria-label="Next picture"
-          >
-            &#8250;
-          </button>
-        </div>
-
-        <div class="gallery-counter" id="galleryCounter"></div>
-
-        <div
-          class="gallery-thumbnails"
-          id="galleryThumbnails"
-          aria-label="Product picture thumbnails"
-        ></div>
-      </div>
-
-      <div class="gallery-details">
-        <div class="product-category" id="galleryCategory"></div>
-
-        <h2 id="galleryProductName"></h2>
-
-        <div class="gallery-price" id="galleryPrice"></div>
-
-        <div class="gallery-description" id="galleryDescription"></div>
-
-        <a
-          class="enquire-btn"
-          id="galleryEnquire"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>☏</span> ENQUIRE ABOUT THIS PRODUCT
-        </a>
-
-        <div class="gallery-count-note" id="galleryCountNote"></div>
-      </div>
+      <button
+        class="gallery-nav gallery-next"
+        id="galleryNext"
+        type="button"
+        aria-label="Next picture"
+      >
+        &#8250;
+      </button>
     </div>
+
+    <div class="gallery-counter" id="galleryCounter"></div>
+
+    <div
+      class="gallery-thumbnails"
+      id="galleryThumbnails"
+      aria-label="Product picture thumbnails"
+    ></div>
   </div>
 
-  <a
-    class="whatsapp-float"
-    id="floatingWhatsApp"
-    href="#contact"
-    aria-label="Contact us on WhatsApp"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    ☎
-  </a>
+  <div class="gallery-details">
+    <div class="product-category" id="galleryCategory"></div>
 
-  <script>
+    <h2 id="galleryProductName"></h2>
+
+    <div class="gallery-price" id="galleryPrice"></div>
+
+    <div class="gallery-description" id="galleryDescription"></div>
+
+    <a
+      class="enquire-btn"
+      id="galleryEnquire"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span>☏</span> ENQUIRE ABOUT THIS PRODUCT
+    </a>
+
+    <div class="gallery-count-note" id="galleryCountNote"></div>
+  </div>
+</div>
+
+  </div><a
+class="whatsapp-float"
+id="floatingWhatsApp"
+href="#contact"
+aria-label="Contact us on WhatsApp"
+target="_blank"
+rel="noopener noreferrer"
+
+«»
+
+☎
+
+  </a>  <script>
     (() => {
       "use strict";
 
-      // --------------------------------------------------
       // SUPABASE CONFIGURATION
-      // Uses the settings already defined in config.js.
-      // --------------------------------------------------
 
       const config = window.STORE_CONFIG || {};
 
@@ -1423,10 +1602,7 @@
         );
       }
 
-      // --------------------------------------------------
       // WHATSAPP CONFIGURATION
-      // Reads your existing WhatsApp settings from config.js.
-      // --------------------------------------------------
 
       const whatsappNumber1 = String(
         config.WHATSAPP_NUMBER_1 || ""
@@ -1470,9 +1646,7 @@
         );
       }
 
-      // --------------------------------------------------
       // ELEMENTS AND STATE
-      // --------------------------------------------------
 
       const productGrid = document.getElementById("productGrid");
       const productSearch = document.getElementById("productSearch");
@@ -1504,9 +1678,7 @@
 
       setupGeneralWhatsAppLinks();
 
-      // --------------------------------------------------
       // HELPERS
-      // --------------------------------------------------
 
       function normalizeText(value) {
         return String(value || "").trim().toLowerCase();
@@ -1567,13 +1739,10 @@
           }
         }
 
-        // Main product picture comes first.
         addImage(product.image_url);
 
-        // Additional pictures are stored in gallery_images.
         let extraImages = product.gallery_images;
 
-        // Defensive handling in case a source returns JSON text.
         if (typeof extraImages === "string") {
           try {
             extraImages = JSON.parse(extraImages);
@@ -1611,9 +1780,7 @@
         productGrid.appendChild(wrapper);
       }
 
-      // --------------------------------------------------
       // LOAD PRODUCTS FROM SUPABASE
-      // --------------------------------------------------
 
       async function loadProducts() {
         if (!supabaseClient) {
@@ -1654,9 +1821,7 @@
         }
       }
 
-      // --------------------------------------------------
       // RENDER PRODUCT CARDS
-      // --------------------------------------------------
 
       function createProductCard(product) {
         const card = createElement("article", "product-card");
@@ -1666,8 +1831,6 @@
 
         const imageWrap = createElement("div", "product-image-wrap");
         imageWrap.setAttribute("role", "button");
-
-        // FIXED: The original code was missing a quotation mark here.
         imageWrap.setAttribute("tabindex", "0");
 
         imageWrap.setAttribute(
@@ -1770,9 +1933,7 @@
         return card;
       }
 
-      // --------------------------------------------------
       // SEARCH AND CATEGORY FILTERING
-      // --------------------------------------------------
 
       function renderProducts() {
         const searchTerm = normalizeText(productSearch.value);
@@ -1837,7 +1998,6 @@
             );
           });
 
-          // Category cards also scroll to the product collection.
           if (button.classList.contains("category-card")) {
             document.getElementById("products").scrollIntoView({
               behavior: "smooth"
@@ -1848,9 +2008,7 @@
         });
       });
 
-      // --------------------------------------------------
       // PRODUCT GALLERY
-      // --------------------------------------------------
 
       function openGallery(product) {
         activeGalleryProduct = product;
@@ -2025,7 +2183,8 @@
         }
       });
 
-      // Mobile swipe support.
+      // MOBILE SWIPE SUPPORT
+
       let touchStartX = 0;
       let touchStartY = 0;
 
@@ -2049,7 +2208,6 @@
         const differenceX = touchEndX - touchStartX;
         const differenceY = touchEndY - touchStartY;
 
-        // Only change pictures for a clear horizontal swipe.
         if (
           Math.abs(differenceX) > 45 &&
           Math.abs(differenceX) > Math.abs(differenceY) * 1.25
@@ -2062,12 +2220,9 @@
         }
       }, { passive: true });
 
-      // --------------------------------------------------
       // START
-      // --------------------------------------------------
 
       loadProducts();
     })();
-  </script>
-</body>
+  </script></body>
 </html>
