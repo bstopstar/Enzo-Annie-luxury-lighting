@@ -1666,7 +1666,10 @@
 
         const imageWrap = createElement("div", "product-image-wrap");
         imageWrap.setAttribute("role", "button");
-        imageWrap.setAttribute("tabindex", "0);
+
+        // FIXED: The original code was missing a quotation mark here.
+        imageWrap.setAttribute("tabindex", "0");
+
         imageWrap.setAttribute(
           "aria-label",
           "View pictures of " + String(product.name || "this product")
